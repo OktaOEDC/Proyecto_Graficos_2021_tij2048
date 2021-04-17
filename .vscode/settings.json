@@ -1,5 +1,5 @@
 {
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": false,
-    "python.pythonPath": "C:\\Panda3D-1.10.9-x64\\python\\python.exe"
+    "python.pythonPath": "C:\\Users\\Omar\\AppData\\Local\\Programs\\Python\\Python38\\python.exe"
 }
