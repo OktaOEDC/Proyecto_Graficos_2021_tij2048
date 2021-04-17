@@ -21,7 +21,7 @@ class test1(ShowBase):
     def Main_menu(self):
         self.disableMouse
         imageObject = OnscreenImage(image='backgrounds/90sbg.jpg', pos=(0, 0, 0), scale=(1.78,1,1))
-        font = loader.loadFont('comic.ttf')
+        font = loader.loadFont('./fonts/comic/comic.ttf')
         TextInsertName = OnscreenText(font=font, text='Ingrese su nombre:', pos=(-0.5, 0.02), scale=0.07, fg=(143/255,250/255,2/255,1))
         self.TextInsertNameInput = DirectEntry(text = "", scale=.05, numLines = 1, focus=1)
         ButtonInsertName = DirectButton(text=("Insertar nombre"), scale=.05, pos=(0.25,0,-0.10),command=self.getPlayerName)
