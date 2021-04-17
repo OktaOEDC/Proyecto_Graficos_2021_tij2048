@@ -1,4 +1,4 @@
 {
-    "python.formatting.provider": "black",
-    "python.pythonPath": "C:\\Users\\julio\\AppData\\Local\\Programs\\Python\\Python39\\python.exe"
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": false
 }
