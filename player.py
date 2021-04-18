@@ -1,6 +1,6 @@
 import logging
 logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
+                    format='%(levelname)s - %(message)s')
 
 
 class Player:
@@ -69,8 +69,8 @@ class Player:
 
         if self.flags['neoliberal'] == True:
             self.wallet = 1000
-            print('Bienvenido al PRI compadre')
-            self.name('Carlos S')
+            logging.debug('Bienvenido al PRI compadre')
+            self.name = 'Carlos S'
 
     def amlo_mode(self):
         """CHECA Y HACE AL JUGADOR POBRE
@@ -80,8 +80,8 @@ class Player:
         if self.flags['populista'] == True:
             self.wallet = 0
             self.nombre = 'Andres Manuel'
-            print('MORENA!')
-            print('HORA DE HACER UN TREN PLEBE')
+            logging.debug('MORENA!')
+            logging.debug('HORA DE HACER UN TREN PLEBE')
 
     def change_pol(self, change):
         """Funcion que suma o resta los puntos del atributo politica
@@ -140,7 +140,9 @@ class Player:
 
 
 def main():
-    print('hello world!')
-
+    logging.debug('hello world!')
+    p1 = Player('Ulises')
+    p1.pri_gang()
+ 
 
 main()
