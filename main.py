@@ -11,7 +11,7 @@ from panda3d.core import TextFont
 from panda3d.core import PointLight
 from direct.gui.DirectGuiGlobals import WITHIN
 loadPrcFile("config/conf.prc")
-
+import player
 class Tijuana2033(ShowBase):
     def __init__(self):
         super().__init__()  
@@ -35,8 +35,9 @@ class Tijuana2033(ShowBase):
 
     def getPlayerName(self):
         self.playerName = self.TextInsertNameInput.get()
-        print("Hola " + str(self.playerName))
-
+        blade_runner = player.Player(self.playerName) 
+        print('Hola',blade_runner.get_name(),'bienvenido a TIJUANA 2033')             
+              
     def setFullScreen(self):
         props = WindowProperties()
         if(self.IsFullScreen == True):
