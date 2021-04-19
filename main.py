@@ -12,6 +12,8 @@ from panda3d.core import PointLight
 from direct.gui.DirectGuiGlobals import WITHIN
 loadPrcFile("config/conf.prc")
 import player
+
+
 class Tijuana2033(ShowBase):
     def __init__(self):
         super().__init__()  
