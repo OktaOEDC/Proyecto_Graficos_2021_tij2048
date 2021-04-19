@@ -54,7 +54,10 @@ class Textcrawl(ShowBase):
             textposy+=0.05
             
 
-    def print_text():
+    def print_text(self, task):
+        """Esta funcion es con la que imprimire lentamente el text crawl en vez de todo del putaso
+        """
+        
         pass
         
     
