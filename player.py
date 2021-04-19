@@ -1,4 +1,5 @@
 import logging
+from direct.showbase.ShowBase import ShowBase
 logging.basicConfig(level=logging.DEBUG,
                     format='%(levelname)s - %(message)s')
 
@@ -52,16 +53,18 @@ class Player:
     def __init__(self, name):
         self.name = name
         self.wallet = 0
+        self.vidas = 3
         self.politica = 0
         self.educacion = 0
         self.popularidad = 0
         self.mascara = 0
         self.xx = 0
         self.yy = 0
+        self.pos = {}
         self.flags = {'anarquista': False, 'libertariano': False, 'fascista': False,
-                      'comunista': False, 'neoliberal': False, 'populista': False}
+                      'comunista': False, 'neoliberal': False, 'populista': False, 'autoritario': False}
 
-    def pri_gang(self):
+    def mode_pri(self):
         """CHECA Y HACE AL JUGADOR PRIISTA
         """
         if self.name == 'Ulises':
@@ -72,7 +75,7 @@ class Player:
             logging.debug('Bienvenido al PRI compadre')
             self.name = 'Carlos S'
 
-    def amlo_mode(self):
+    def mode_amlo(self):
         """CHECA Y HACE AL JUGADOR POBRE
         """
         if self.name == 'Julio':
@@ -82,6 +85,13 @@ class Player:
             self.nombre = 'Andres Manuel'
             logging.debug('MORENA!')
             logging.debug('HORA DE HACER UN TREN PLEBE')
+
+    def mode_mexico(self):
+        """MODO MEXICO
+        """
+        self.vidas = 1
+        self.wallet = 0
+        logging.debug('bienvenido a Mexico, F en el chat...')
 
     def change_pol(self, change):
         """Funcion que suma o resta los puntos del atributo politica
@@ -135,14 +145,27 @@ class Player:
     def get_pop(self):
         return self.popularidad
 
+    def get_mascara(self):
+        return self.mascara
+
     def calculate_phil(self):
-        print('beep bop')
+        """Aun no he terminado las auxiliares
+        """
+        # --------------edge cases -----------
+        # Autoritario
+        if self.get_pop() <= 0:
+            self.flags['autoritario'] = True
+            logging.debug('El jugador es Autoritario')
+        # populista
+        if self.get_pop() >= 10:
+            self.flags['populista'] = True
+            logging.debug('El jugador es Populista')
+        # anarquismo
+        if (self.get_pol() <= 0) and (self.get_mascara > 0):  # tal vez pongo un trap question
+            self.flags['anarquista']
+        # fascismo
+        # falta un criterio que sera un trap question
+        if (self.get_pol() >= 10 and (self.get_pop() > 5) and (self.get_edu() > 5)):
+            self.flags['fascista']
+            logging.debug('El jugador es Fascista')
 
-
-def main():
-    logging.debug('hello world!')
-    p1 = Player('Ulises')
-    p1.pri_gang()
- 
-
-main()
