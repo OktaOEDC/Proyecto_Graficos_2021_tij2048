@@ -14,7 +14,7 @@ text_titles_titles = ["INJUSTICIA", "INDIVIDUO",
 class Textcrawl(ShowBase):
 
     story = [
-        ["TIJUANA 2033.", "Las Pulgas es fumigada.", "Quien fumiga al fumigador?",
+        ["TIJUANA 2033", "Las Pulgas es fumigada.", "Quien fumiga al fumigador?",
             "WE LIVE IN A SOCIETY", "Where honor is a distant memory"],
         ["Xolos International compro la presa de Tijuana en 2023"],
         ["Tijuana cedio a ser una democracia directa en 2025"],
@@ -33,22 +33,31 @@ class Textcrawl(ShowBase):
         self.scene.setScale(1, 1, 1)
         self.scene.setPos(0, 25, 0)
         self.make_text()
-     
+
 
     def make_text(self):
         """AUN NO LO HE HECHO
         """
-        font = loader.loadFont('/fonts/comic/comicbd.ttf')
-        font.setPageSize(512,512)
+        #font = loader.loadFont('/fonts/comic/comicbd.ttf')
+        #font.setPageSize(512,512)
         
-        textposx=-0.5
-        textposy=0.02
+        textposx=0
+        textposy=-0.5
         for x in self.story:
-            for y in self.story[x]:
-                time.sleep(1)
-                textObject = OnscreenText(text=y, pos=(textposx,textposy),scale=0.07)
-                textposy += 0.5
+            for y in x:
+            
+                if y == 'TIJUANA 2033':
+                    pass
+                else:
+                    textObject = OnscreenText(text=y, pos=(textposx,textposy),scale=0.05,  fg=[240,240,240,1], wordwrap=45, bg=[0,0,0,0.1])
+                    textposy += 0.1
+            textposy+=0.05
+            
 
-
+    def print_text():
+        pass
+        
+    
 game = Textcrawl()
 game.run()
+
