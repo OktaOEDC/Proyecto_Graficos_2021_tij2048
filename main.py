@@ -38,7 +38,21 @@ class Tijuana2033(ShowBase):
     def getPlayerName(self):
         self.playerName = self.TextInsertNameInput.get()
         blade_runner = player.Player(self.playerName) 
-        print('Hola',blade_runner.get_name(),'bienvenido a TIJUANA 2033')             
+        print('Hola',blade_runner.get_name(),'bienvenido a TIJUANA 2033')
+        ##Remover el menu principal
+        self.fondo.removeNode()
+        self.fullScreenShape.removeNode() 
+        self.TextInsertName.removeNode()
+        self.TextInsertNameInput.removeNode()
+        self.ButtonInsertName.removeNode()
+        self.InvisibleButton.removeNode()
+        self.TextFullScreen.removeNode()
+        ##Transicionar al primer nivel
+        self.Nivel1 = self.loader.loadModel("models/Campestre_light.bam")
+        self.Nivel1.reparentTo(self.render)
+        self.Nivel1.setScale(1, 1, 1)
+        self.Nivel1.setPos(-1.5, 6,-1 )
+
               
     def setFullScreen(self):
         props = WindowProperties()
@@ -60,10 +74,10 @@ class Tijuana2033(ShowBase):
         self.fondo.setScale(0.27,0.01,0.32)
         self.fondo.setPos(0, 7, 0)
         font = loader.loadFont('./fonts/comic/comic.ttf')
-        TextInsertName = OnscreenText(font=font, text='Ingrese su nombre:', pos=(-0.5, 0.02), scale=0.07, fg=(143/255,250/255,2/255,1))
-        TextFullScreen = OnscreenText(font=font, text='Fulscreen:', pos=(-0.99, -0.67), scale=0.04, fg=(143/255,250/255,2/255,1))
+        self.TextInsertName = OnscreenText(font=font, text='Ingrese su nombre:', pos=(-0.5, 0.02), scale=0.07, fg=(143/255,250/255,2/255,1))
+        self.TextFullScreen = OnscreenText(font=font, text='Fulscreen:', pos=(-0.99, -0.67), scale=0.04, fg=(143/255,250/255,2/255,1))
         self.TextInsertNameInput = DirectEntry(text = "", scale=.05, numLines = 1, focus=1)
-        ButtonInsertName = DirectButton(text=("Insertar nombre"), scale=.05, pos=(0.25,0,-0.10),command=self.getPlayerName)
+        self.ButtonInsertName = DirectButton(text=("Insertar nombre"), scale=.05, pos=(0.25,0,-0.10),command=self.getPlayerName)
         self.InvisibleButton = DirectButton(text=("*"), scale=.05, pos=(-1, 5,-0.73),command=self.setFullScreen)
         self.InvisibleButton.bind(WITHIN, command = self.mouseOver)
 
