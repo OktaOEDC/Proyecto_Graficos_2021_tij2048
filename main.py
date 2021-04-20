@@ -62,6 +62,8 @@ class Tijuana2033(ShowBase):
 
         taskMgr.add(self.Main_menu, 'first', sort=1, uponDeath=cleanUp)
         taskMgr.add(self.transition, 'trans', sort=2, uponDeath=cleanUp)
+        taskMgr.add(self.level1, 'level1', sort=2, uponDeath=cleanUp)
+
 
     def mouseOver(self, argumento):
         rotation_interval = self.fullScreenShape.hprInterval(
