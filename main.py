@@ -34,9 +34,11 @@ class Tijuana2033(ShowBase):
         self.plnp = self.render.attachNewNode(plight)
         self.render.setLight(self.plnp)
 
+
     def mouseOver(self, argumento): 
         rotation_interval = self.fullScreenShape.hprInterval(10,Vec3(360,0,0))
         rotation_interval.start()
+
 
     def getPlayerName(self):
         self.playerName = self.TextInsertNameInput.get()
@@ -56,7 +58,11 @@ class Tijuana2033(ShowBase):
         self.Nivel1 = self.loader.loadModel("models/Campestre_light.bam")
         self.Nivel1.reparentTo(self.render)
         self.Nivel1.setScale(1, 1, 1)
-        self.Nivel1.setPos(-1.5, 6,-1 )
+        self.Nivel1.setPos(0.33, 6,-1 )
+
+        # We use a special trick of Panda3D: by default we have two 2D renderers: render2d and render2dp, the two being equivalent. We can then use render2d for front rendering (like modelName), and render2dp for background rendering.
+        self.background = OnscreenImage(parent=render2dp, image="textures/Skunight.png") # Load an image object
+        base.cam2dp.node().getDisplayRegion(0).setSort(-20) # Force the rendering to render the background image first (so that it will be put to the bottom of the scene since other models will be necessarily drawn on top)
 
     def transition(self, title):
         self.scene = self.loader.loadModel("models/fondo_menu.bam")
@@ -87,6 +93,7 @@ class Tijuana2033(ShowBase):
             props.fullscreen = True
             self.IsFullScreen = True
         self.win.requestProperties(props)
+
 
     def Main_menu(self):
         self.fullScreenShape = self.loader.loadModel("models/fullscreen_shape.bam")
