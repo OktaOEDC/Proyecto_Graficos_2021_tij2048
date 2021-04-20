@@ -1,7 +1,17 @@
 import logging
 
 from direct.gui.DirectButton import DirectButton
+<<<<<<< HEAD
 from direct.gui.DirectEntry import DirectEntry
+=======
+from panda3d.core import Fog
+from panda3d.core import loadPrcFile
+from panda3d.core import WindowProperties
+from panda3d.core import TextNode
+from panda3d.core import Vec3
+from panda3d.core import TextFont
+from panda3d.core import PointLight
+>>>>>>> 41a598963fcc8b82062a41293ac630927ed6bc20
 from direct.gui.DirectGuiGlobals import WITHIN
 from direct.gui.OnscreenImage import OnscreenImage
 from direct.gui.OnscreenText import OnscreenText
@@ -29,6 +39,7 @@ class Tijuana2033(ShowBase):
         self.IsFullScreen = False
         self.disableMouse()
         ##
+<<<<<<< HEAD
         self.light_model = self.loader.loadModel('models/misc/sphere')
         self.light_model.setScale(0.1, 0.1, 0.1)
         self.light_model.reparentTo(self.render)
@@ -36,6 +47,13 @@ class Tijuana2033(ShowBase):
         plight = PointLight("plight")
         plight.setColor((1, 1, 1, 1))
         self.plnp = self.render.attachNewNode(plight)
+=======
+        self.plight = PointLight("plight")
+        self.plight.setColor((1,1,1,1))
+        self.plnp = self.render.attachNewNode(self.plight)
+        ##self.plight.setAttenuation((1,0,1))
+        ##self.plnp.setPos(0.33, 6,4)
+>>>>>>> 41a598963fcc8b82062a41293ac630927ed6bc20
         self.render.setLight(self.plnp)
         #self.Main_menu()
         
@@ -49,9 +67,17 @@ class Tijuana2033(ShowBase):
 
     def getPlayerName(self):
         self.playerName = self.TextInsertNameInput.get()
+<<<<<<< HEAD
         self.blade_runner = player.Player(self.playerName)
         print('Hola', self.blade_runner.get_name(), 'bienvenido a TIJUANA 2033')
         # Remover el menu principal
+=======
+        self.blade_runner = player.Player(self.playerName) 
+        print('Hola',self.blade_runner.get_name(),'bienvenido a TIJUANA 2033')
+        ##Remover el menu principal
+        self.render.clearLight()
+        self.plnp.removeNode()
+>>>>>>> 41a598963fcc8b82062a41293ac630927ed6bc20
         self.fondo.removeNode()
         self.fullScreenShape.removeNode()
         self.TextInsertName.removeNode()
@@ -60,7 +86,33 @@ class Tijuana2033(ShowBase):
         self.InvisibleButton.removeNode()
         self.TextFullScreen.removeNode()
         
+<<<<<<< HEAD
         taskMgr.myTask = taskMgr.doMethodLater(0, self.transition, 'transition')
+=======
+        ###
+        self.Nivel1 = self.loader.loadModel("models/Campestre_light.bam")
+        self.Nivel1.reparentTo(self.render)
+        self.Nivel1.setScale(1, 1, 1)
+        self.Nivel1.setPos(0.33, 6,-1 )
+        self.camera.setPos(-0.66,2.5,0.55)
+        ##self.camera.setPos(0.33,6,5)
+        self.camera.lookAt(self.Nivel1)
+        self.background = OnscreenImage(parent=render2dp, image="textures/Skunight.png") # Load an image object
+        base.cam2dp.node().getDisplayRegion(0).setSort(-20) 
+        color = (0.8, 0.8, 0.8)
+        linfog = Fog("Scene-wide exponential Fog object")
+        linfog.setColor(*color)
+        linfog.setLinearRange(0,25)
+        linfog.setLinearFallback(45,160,320)
+        render.setFog(linfog)
+        base.setBackgroundColor(*color)
+        self.plight_lv1 = PointLight("plight")
+        self.plight_lv1.setColor((1,1,1,1))
+        self.plnp_lv1 = self.render.attachNewNode(self.plight_lv1)
+        self.plight_lv1.setAttenuation((1,0,1))
+        self.plnp_lv1.setPos(0.33, 6,4)
+        self.render.setLight(self.plnp_lv1)
+>>>>>>> 41a598963fcc8b82062a41293ac630927ed6bc20
 
 
     def transition(self, task):
