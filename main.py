@@ -13,6 +13,9 @@ from direct.gui.DirectGuiGlobals import WITHIN
 loadPrcFile("config/conf.prc")
 import player
 
+text_titles_titles = ["INJUSTICIA", "INDIVIDUO",
+                      "BUSQUEDA DE JUSTICIA", "FALLA DE SISTEMA"]
+
 
 class Tijuana2033(ShowBase):
     def __init__(self):
@@ -37,8 +40,8 @@ class Tijuana2033(ShowBase):
 
     def getPlayerName(self):
         self.playerName = self.TextInsertNameInput.get()
-        blade_runner = player.Player(self.playerName) 
-        print('Hola',blade_runner.get_name(),'bienvenido a TIJUANA 2033')
+        self.blade_runner = player.Player(self.playerName) 
+        print('Hola',self.blade_runner.get_name(),'bienvenido a TIJUANA 2033')
         ##Remover el menu principal
         self.fondo.removeNode()
         self.fullScreenShape.removeNode() 
@@ -48,12 +51,33 @@ class Tijuana2033(ShowBase):
         self.InvisibleButton.removeNode()
         self.TextFullScreen.removeNode()
         ##Transicionar al primer nivel
+        
+        ###
         self.Nivel1 = self.loader.loadModel("models/Campestre_light.bam")
         self.Nivel1.reparentTo(self.render)
         self.Nivel1.setScale(1, 1, 1)
         self.Nivel1.setPos(-1.5, 6,-1 )
 
-              
+    def transition(self, title):
+        self.scene = self.loader.loadModel("models/fondo_menu.bam")
+        # Reparent the model to render.
+        self.scene.reparentTo(self.render)
+        # Apply scale and position transforms on the model.
+        self.scene.setScale(1, 1, 1)
+        self.scene.setPos(0, 25, 0)
+    
+        #TITLE TEXT PART...
+        self.textObject = OnscreenText(text=y, pos=(textposx,textposy),scale=0.05,  fg=[240,240,240,1], wordwrap=45, bg=[0,0,0,0.1])
+        return task.done
+    
+    def loading():
+        self.light_model = self.loader.loadModel('models/misc/sphere')
+        self.light_model.setScale(0.1, 0.1, 0.1)
+        self.light_model.reparentTo(self.render)
+        
+            
+    
+                  
     def setFullScreen(self):
         props = WindowProperties()
         if(self.IsFullScreen == True):

@@ -10,9 +10,6 @@ import time
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
-text_titles_titles = ["INJUSTICIA", "INDIVIDUO",
-                      "BUSQUEDA DE JUSTICIA", "FALLA DE SISTEMA"]
-
 class Textcrawl(ShowBase):
 
     story = [
