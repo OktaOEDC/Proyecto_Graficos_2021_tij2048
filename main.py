@@ -62,7 +62,7 @@ class Tijuana2033(ShowBase, FSM):
     def __init__(self):
         ShowBase.__init__(self)
         FSM.__init__(self, "FSM-Game")
-        self.win
+        ##self.win
         render.setShaderAuto()
         self.render.setAntialias(AntialiasAttrib.MAuto)
         self.playerName = ""
@@ -73,10 +73,9 @@ class Tijuana2033(ShowBase, FSM):
         self.plight = PointLight("plight")
         self.plight.setColor((1, 1, 1, 1))
         self.plnp = self.render.attachNewNode(self.plight)
-        # self.plight.setAttenuation((1,0,1))
-        #self.plnp.setPos(0.33, 6,4)
         self.render.setLight(self.plnp)
         # get the displays width and height for later usage
+<<<<<<< HEAD
         #self.dispWidth = self.pipe.getDisplayWidth()
         #props = WindowProperties() 
         #self.dispHeight = self.pipe.getDisplayHeight()
@@ -88,6 +87,17 @@ class Tijuana2033(ShowBase, FSM):
         self.crawl = testlevel.testCrawl()
         self.crawl.start()
     
+=======
+        # self.dispWidth = self.pipe.getDisplayWidth()
+        # props = WindowProperties() 
+        # self.dispHeight = self.pipe.getDisplayHeight()
+        # props.setSize(self.dispWidth, self.dispHeight)
+        #base.win.requestProperties(props) 
+        # ESTA ES LA SECUENCIA DE LO QUE QUIERO HACER, PERO NO SE COMO HACER QUE OCURRAN UNA DE OTRA DE FORMA TEMPORAZIDA O CONDICIONAL SIN BOTONES
+
+        #self.crawl = testlevel.testCrawl()
+        #self.crawl.start()
+>>>>>>> e726e82741dd7a5ebbd77ccd46d37c1fc4736001
         self.intro = logoscreen.Logoscreen()
         self.intro.start()
         
@@ -161,14 +171,15 @@ class Tijuana2033(ShowBase, FSM):
         return task.done
 
     def setFullScreen(self):
-        props = WindowProperties()
-        if(self.IsFullScreen == True):
-            props.fullscreen = False
-            self.IsFullScreen = False
-        else:
-            props.fullscreen = True
-            self.IsFullScreen = True
-        self.win.requestProperties(props)
+        # props = WindowProperties()
+        # if(self.IsFullScreen == True):
+        #     props.fullscreen = False
+        #     self.IsFullScreen = False
+        # else:
+        #     props.fullscreen = True
+        #     self.IsFullScreen = True
+        # self.win.requestProperties(props)
+        pass
 
     def Main_menu(self, task):
         self.fullScreenShape = self.loader.loadModel(
