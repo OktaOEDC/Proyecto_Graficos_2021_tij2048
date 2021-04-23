@@ -1,20 +1,25 @@
-import time
 import logging
+import os
+import time
 
+from direct.fsm.FSM import FSM
 from direct.gui.DirectButton import DirectButton
 from direct.gui.DirectEntry import DirectEntry
+from direct.gui.DirectGui import DGG
 from direct.gui.DirectGuiGlobals import WITHIN
 from direct.gui.OnscreenImage import OnscreenImage
 from direct.gui.OnscreenText import OnscreenText
+from direct.showbase import DirectObject
 from direct.showbase.ShowBase import *
 from direct.showbase.ShowBase import ShowBase
 from direct.task import Task, TaskManagerGlobal
 from direct.task.TaskManagerGlobal import taskMgr
-#from direct import *
-from panda3d.core import (Fog, NodePath, PointLight, TextFont, TextNode, Vec3,
-                          WindowProperties, loadPrcFile)
-
+from panda3d.core import *
+from direct.showbase.Loader import Loader
 import player
+import textcrawl
+import testlevel
+import logoscreen
 
 loadPrcFile("config/conf.prc")
 
@@ -23,6 +28,15 @@ text_titles_titles = ["INJUSTICIA", "INDIVIDUO",
                       "BUSQUEDA DE JUSTICIA", "FALLA DE SISTEMA"]
 
 taskAccumulator = 0
+story = [
+        ["TIJUANA 2033", "Las Pulgas es fumigada.", "Quien fumiga al fumigador?",
+            "WE LIVE IN A SOCIETY", "Where honor is a distant memory"],
+        ["Xolos International compro la presa de Tijuana en 2023"],
+        ["Tijuana cedio a ser una democracia directa en 2025"],
+        ["Dubai y China compraron McDonalds en 2026 debido al colapso espcultativo del mercado de gallos en Asia."],
+        ["En 2024 los Estados Unidos prohibio en su enteridad la produccion de carnes a base de animales.",
+            "El SOYBOI PARTY ha remplazado al partido libertariano como la astilla de circulo politico en Washington "],
+        ["Mandato numero 1984 permite el uso continuo en espacios publicos de mascaras de cobertura completa tras la pandemia de 2022 de covid-21"]]
 
 
 def cleanUp(task):
@@ -44,9 +58,13 @@ def taskStop(task):
     taskMgr.remove('Accumulator')
 
 
-class Tijuana2033(ShowBase):
+class Tijuana2033(ShowBase, FSM):
     def __init__(self):
-        super().__init__()
+        ShowBase.__init__(self)
+        FSM.__init__(self, "FSM-Game")
+        self.win
+        render.setShaderAuto()
+        self.render.setAntialias(AntialiasAttrib.MAuto)
         self.playerName = ""
         self.IsFullScreen = False
         self.blade_runner = player.Player(self.playerName)
@@ -56,14 +74,26 @@ class Tijuana2033(ShowBase):
         self.plight.setColor((1, 1, 1, 1))
         self.plnp = self.render.attachNewNode(self.plight)
         # self.plight.setAttenuation((1,0,1))
-        ##self.plnp.setPos(0.33, 6,4)
+        #self.plnp.setPos(0.33, 6,4)
         self.render.setLight(self.plnp)
-        # self.Main_menu()
+        # get the displays width and height for later usage
+        self.dispWidth = self.pipe.getDisplayWidth()
+        props = WindowProperties() 
+        self.dispHeight = self.pipe.getDisplayHeight()
+        props.setSize(self.dispWidth, self.dispHeight)
+        base.win.requestProperties(props) 
+        # ESTA ES LA SECUENCIA DE LO QUE QUIERO HACER, PERO NO SE COMO HACER QUE OCURRAN UNA DE OTRA DE FORMA TEMPORAZIDA O CONDICIONAL SIN BOTONES
 
-        taskMgr.add(self.Main_menu, 'first', sort=1, uponDeath=cleanUp)
-        taskMgr.add(self.transition, 'trans', sort=2, uponDeath=cleanUp)
-        taskMgr.add(self.level1, 'level1', sort=2, uponDeath=cleanUp)
+        #self.crawl = testlevel.testCrawl()
+        #self.crawl.start()
+        self.intro = logoscreen.Logoscreen()
+        self.intro.start()
+        
 
+        # taskMgr.add(self.crawl,uponDeath=cleanUp)
+        #taskMgr.add(self.Main_menu, 'first', sort=1, uponDeath=cleanUp)
+        #taskMgr.add(self.transition, 'trans', sort=2, uponDeath=cleanUp)
+        #taskMgr.add(self.level1, 'level1', sort=2, uponDeath=cleanUp)
 
     def mouseOver(self, argumento):
         rotation_interval = self.fullScreenShape.hprInterval(
@@ -127,11 +157,10 @@ class Tijuana2033(ShowBase):
         if len(self.blade_runner.name) < 1:
             task.time = 0
             return Task.again
-        if task.time !=0:
+        if task.time != 0:
             self.textObject = OnscreenText(text="NIVEL 1", pos=(textposx, textposy), scale=0.1,  fg=[
                 240, 240, 240, 1], wordwrap=45, bg=[0, 0, 0, 0.1])
         return Task.done
-        
 
         self.textObject.removeNode()
         return Task.done
@@ -161,9 +190,7 @@ class Tijuana2033(ShowBase):
             props.fullscreen = True
             self.IsFullScreen = True
         self.win.requestProperties(props)
-        
 
-    
     def Main_menu(self, task):
         self.fullScreenShape = self.loader.loadModel(
             "models/fullscreen_shape.bam")
