@@ -32,12 +32,9 @@ class Logoscreen:
         self.ambientSound.play()
         self.fondo.show()
         self.text()
-<<<<<<< HEAD
 
-=======
         # if self.ambientSound.status() == AudioSound.PLAYING:
         #     self.stop()
->>>>>>> e726e82741dd7a5ebbd77ccd46d37c1fc4736001
 
     def stop(self):
         self.fondo.hide()
