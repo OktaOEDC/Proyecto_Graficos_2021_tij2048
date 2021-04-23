@@ -20,7 +20,7 @@ import player
 import textcrawl
 import testlevel
 import logoscreen
-
+import level1
 loadPrcFile("config/conf.prc")
 
 
@@ -77,19 +77,22 @@ class Tijuana2033(ShowBase, FSM):
         #self.plnp.setPos(0.33, 6,4)
         self.render.setLight(self.plnp)
         # get the displays width and height for later usage
-        self.dispWidth = self.pipe.getDisplayWidth()
-        props = WindowProperties() 
-        self.dispHeight = self.pipe.getDisplayHeight()
-        props.setSize(self.dispWidth, self.dispHeight)
-        base.win.requestProperties(props) 
-        # ESTA ES LA SECUENCIA DE LO QUE QUIERO HACER, PERO NO SE COMO HACER QUE OCURRAN UNA DE OTRA DE FORMA TEMPORAZIDA O CONDICIONAL SIN BOTONES
+        #self.dispWidth = self.pipe.getDisplayWidth()
+        #props = WindowProperties() 
+        #self.dispHeight = self.pipe.getDisplayHeight()
+        #props.setSize(self.dispWidth, self.dispHeight)
+        #base.win.requestProperties(props) 
+        
+        
 
-        #self.crawl = testlevel.testCrawl()
-        #self.crawl.start()
+        self.crawl = testlevel.testCrawl()
+        self.crawl.start()
+    
         self.intro = logoscreen.Logoscreen()
         self.intro.start()
         
-
+        self.l1 = level1.Level1()
+        self.l1.start()
         # taskMgr.add(self.crawl,uponDeath=cleanUp)
         #taskMgr.add(self.Main_menu, 'first', sort=1, uponDeath=cleanUp)
         #taskMgr.add(self.transition, 'trans', sort=2, uponDeath=cleanUp)
@@ -119,31 +122,7 @@ class Tijuana2033(ShowBase, FSM):
         self.TextFullScreen.removeNode()
         ###
 
-    def level1(self, task):
-        self.Nivel1 = self.loader.loadModel("models/Campestre_light.bam")
-        self.Nivel1.reparentTo(self.render)
-        self.Nivel1.setScale(1, 1, 1)
-        self.Nivel1.setPos(0.33, 6, -1)
-        self.camera.setPos(-0.66, 2.5, 0.55)
-        # self.camera.setPos(0.33,6,5)
-        self.camera.lookAt(self.Nivel1)
-        self.background = OnscreenImage(
-            parent=render2dp, image="textures/Skunight.png")  # Load an image object
-        base.cam2dp.node().getDisplayRegion(0).setSort(-20)
-        color = (0.8, 0.8, 0.8)
-        linfog = Fog("Scene-wide exponential Fog object")
-        linfog.setColor(*color)
-        linfog.setLinearRange(0, 25)
-        linfog.setLinearFallback(45, 160, 320)
-        render.setFog(linfog)
-        base.setBackgroundColor(*color)
-        self.plight_lv1 = PointLight("plight")
-        self.plight_lv1.setColor((1, 1, 1, 1))
-        self.plnp_lv1 = self.render.attachNewNode(self.plight_lv1)
-        self.plight_lv1.setAttenuation((1, 0, 1))
-        self.plnp_lv1.setPos(0.33, 6, 4)
-        self.render.setLight(self.plnp_lv1)
-
+    
     def transition(self, task):
         textposx = 0
         textposy = -0.5
