@@ -82,13 +82,15 @@ class Tijuana2033(ShowBase, FSM):
         #base.win.requestProperties(props) 
         # ESTA ES LA SECUENCIA DE LO QUE QUIERO HACER, PERO NO SE COMO HACER QUE OCURRAN UNA DE OTRA DE FORMA TEMPORAZIDA O CONDICIONAL SIN BOTONES
 
-        #self.crawl = testlevel.testCrawl()
-        #self.crawl.start()
+        self.crawl = testlevel.testCrawl()
+        self.crawl.start()
+        
         self.intro = logoscreen.Logoscreen()
         self.intro.start()
         
         self.l1 = level1.Level1(self)
         self.l1.start(self)
+        
         # taskMgr.add(self.crawl,uponDeath=cleanUp)
         #taskMgr.add(self.Main_menu, 'first', sort=1, uponDeath=cleanUp)
         #taskMgr.add(self.transition, 'trans', sort=2, uponDeath=cleanUp)
