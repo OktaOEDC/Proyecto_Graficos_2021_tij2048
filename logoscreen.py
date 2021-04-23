@@ -33,11 +33,8 @@ class Logoscreen:
         self.fondo.show()
         self.text()
 
-        # if self.ambientSound.status() == AudioSound.PLAYING:
-        #     self.stop()
-
     def stop(self):
-        self.fondo.hide()
+        NodePath.remove_node(self.fondo)
         render.clearLight()
         self.ambientSound.stop()
 
@@ -59,3 +56,5 @@ class Logoscreen:
 
         self.putchar = OnscreenText(font=self.runner_font, text=char, scale=_scale, pos=[
                                     _posx, _posy], fg=[240, 0, 0, 1], shadow=[0.5, 0.5, 0.5, 0.5], shadowOffset=(0.04, 0.04))
+        print(self.putchar.getPos())
+        #self.putchar.reparentTo(render)

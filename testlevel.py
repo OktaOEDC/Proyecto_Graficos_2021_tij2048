@@ -33,6 +33,7 @@ class testCrawl:
         self.crawl()
         if self.ambientSound.status()== AudioSound.PLAYING :
           self.stop()
+          
     def stop(self):
         self.fullScreenShape.hide()
         render.clearLight()

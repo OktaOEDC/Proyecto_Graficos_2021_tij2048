@@ -63,6 +63,10 @@ class Player:
         self.pos = {}
         self.flags = {'anarquista': False, 'libertariano': False, 'fascista': False,
                       'comunista': False, 'neoliberal': False, 'populista': False, 'autoritario': False}
+        
+        self.mode_amlo()
+        self.mode_mexico()
+        self.mode_pri()
 
     def mode_pri(self):
         """CHECA Y HACE AL JUGADOR PRIISTA
