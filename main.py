@@ -75,19 +75,6 @@ class Tijuana2033(ShowBase, FSM):
         self.plnp = self.render.attachNewNode(self.plight)
         self.render.setLight(self.plnp)
         # get the displays width and height for later usage
-<<<<<<< HEAD
-        #self.dispWidth = self.pipe.getDisplayWidth()
-        #props = WindowProperties() 
-        #self.dispHeight = self.pipe.getDisplayHeight()
-        #props.setSize(self.dispWidth, self.dispHeight)
-        #base.win.requestProperties(props) 
-        
-        
-
-        self.crawl = testlevel.testCrawl()
-        self.crawl.start()
-    
-=======
         # self.dispWidth = self.pipe.getDisplayWidth()
         # props = WindowProperties() 
         # self.dispHeight = self.pipe.getDisplayHeight()
@@ -97,12 +84,11 @@ class Tijuana2033(ShowBase, FSM):
 
         #self.crawl = testlevel.testCrawl()
         #self.crawl.start()
->>>>>>> e726e82741dd7a5ebbd77ccd46d37c1fc4736001
         self.intro = logoscreen.Logoscreen()
         self.intro.start()
         
-        self.l1 = level1.Level1()
-        self.l1.start()
+        self.l1 = level1.Level1(self)
+        self.l1.start(self)
         # taskMgr.add(self.crawl,uponDeath=cleanUp)
         #taskMgr.add(self.Main_menu, 'first', sort=1, uponDeath=cleanUp)
         #taskMgr.add(self.transition, 'trans', sort=2, uponDeath=cleanUp)
