@@ -16,6 +16,10 @@ class testCrawl:
         self.fullScreenShape.setScale(0.25, 0.25, 0.25)
         self.fullScreenShape.setPos(-1.5, 6, -1)
         self.fullScreenShape.hide()
+        self.fondo = loader.loadModel("./models/fondo_menu.bam")
+        self.fondo.reparentTo(render)
+        self.fondo.setScale(0.6, 0.6, 0.6)
+        self.fondo.setPos(0, 10, 0)
         ambientLight = AmbientLight("ambient_light")
         ambientLight.setColor((0.2, 0.2, 0.2, 1))
         self.alnp = render.attachNewNode(ambientLight)
@@ -27,12 +31,14 @@ class testCrawl:
         sun.setScene(render)
         self.ambientSound = loader.loadSfx('./audio/naive.ogg')
 
+    def __del__(self):
+        print('[*] Destructor called')
+
     def start(self):
+        print('[*] Started text crawl!')
         self.ambientSound.play()
         self.fullScreenShape.show()
         self.crawl()
-        if self.ambientSound.status() == AudioSound.PLAYING:
-            self.stop()
 
     def stop(self):
         self.fullScreenShape.hide()
@@ -40,7 +46,9 @@ class testCrawl:
         self.ambientSound.stop()
         for obj in self.objects:
             obj.removeNode()
-
+        self.__del__()
+    def auxstop(self,task):
+        self.stop()
     def crawl(self):
         textposx = 0.0
         textposy = 0.5
@@ -49,15 +57,14 @@ class testCrawl:
             for y in x:
                 self.print_task = taskMgr.do_method_later(
                     self.textdelay, self.slow_crawl, name='slow_crawl', extraArgs=[y, textposx, textposy])
-                self.textdelay += 2
+                self.textdelay += 0.2
                 textposy -= 0.1
             textposy -= 0.05
-
+        self.exit = taskMgr.doMethodLater(10,self.auxstop,'exit')
     def slow_crawl(self, argtext, _posx, _posy):
         self.textObject = OnscreenText(text=argtext, pos=(_posx, _posy), scale=0.05,  fg=[
             240, 240, 240, 1], wordwrap=45, bg=[0, 0, 0, 0.1])
         self.objects.append(self.textObject)
-        print('SLOW CRAWL')
 
 
 story = [

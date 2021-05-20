@@ -48,6 +48,9 @@ class Menu:
             text=("*"), scale=.05, pos=(-1, 5, -0.73), command=self.setFullScreen)
         self.InvisibleButton.bind(WITHIN, command=self.mouseOver)
     
+    def __del__(self):
+        print('Destructor called')
+        
     def start(self):
         pass
     
@@ -59,7 +62,15 @@ class Menu:
         self.ButtonInsertName.hide()
         self.InvisibleButton.hide()
         self.TextInsertNameInput.hide()
+        self.__del__()
     
+      def getPlayerName(self):
+        self.playerName = self.TextInsertNameInput.get()
+        self.blade_runner = player.Player(self.playerName)
+        print('Hola', self.blade_runner.get_name(), 'bienvenido a TIJUANA 2033')
+        # Remover el menu principal
+        self.blade_runner = player.Player(self.playerName)
+        print('Hola', self.blade_runner.get_name(), 'bienvenido a TIJUANA 2033')      
         # self.render.clearLight()
         # self.plnp.removeNode()
         # self.fondo.removeNode()

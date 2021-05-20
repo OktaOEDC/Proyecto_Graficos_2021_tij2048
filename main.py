@@ -1,7 +1,7 @@
 import logging
+import menu
 import os
 import time
-
 from direct.fsm.FSM import FSM
 from direct.gui.DirectButton import DirectButton
 from direct.gui.DirectEntry import DirectEntry
@@ -14,6 +14,7 @@ from direct.showbase.ShowBase import *
 from direct.showbase.ShowBase import ShowBase
 from direct.task import Task, TaskManagerGlobal
 from direct.task.TaskManagerGlobal import taskMgr
+from direct.particles.ParticleEffect import ParticleEffect
 from panda3d.core import *
 from direct.showbase.Loader import Loader
 import player
@@ -43,6 +44,7 @@ class Tijuana2033(ShowBase, FSM):
         ShowBase.__init__(self)
         FSM.__init__(self, "FSM-Game")
         # self.win
+        base.enableParticles()
         self.playerName = ""
         self.IsFullScreen = False
         self.blade_runner = player.Player(self.playerName)
@@ -57,10 +59,10 @@ class Tijuana2033(ShowBase, FSM):
         self.intro.start()
         
         self.crawl = testlevel.testCrawl()
-        self.accept('space', self.crawl.start)
-        self.accept('space', self.crawl.stop)
-
-        #self.accept('enter', self.Main_menu)
+        self.accept('1',self.crawl.start)
+        
+        self.menu = menu.Menu()
+        self.accept('2',self.menu.start())
 
         #self.l1 = level1.Level1()
 
@@ -69,13 +71,7 @@ class Tijuana2033(ShowBase, FSM):
             10, Vec3(360, 0, 0))
         rotation_interval.start()
 
-    def getPlayerName(self):
-        self.playerName = self.TextInsertNameInput.get()
-        self.blade_runner = player.Player(self.playerName)
-        print('Hola', self.blade_runner.get_name(), 'bienvenido a TIJUANA 2033')
-        # Remover el menu principal
-        self.blade_runner = player.Player(self.playerName)
-        print('Hola', self.blade_runner.get_name(), 'bienvenido a TIJUANA 2033')
+
  
     def setFullScreen(self):
         # props = WindowProperties()
@@ -88,31 +84,7 @@ class Tijuana2033(ShowBase, FSM):
         #  self.win.requestProperties(props)
         pass
 
-    def Main_menu(self):
-        self.fullScreenShape = self.loader.loadModel(
-            "models/fullscreen_shape.bam")
-        self.fullScreenShape.reparentTo(self.render)
-        self.fullScreenShape.setScale(0.25, 0.25, 0.25)
-        self.fullScreenShape.setPos(-1.5, 6, -1)
-        self.fondo = self.loader.loadModel("models/fondo_menu.bam")
-        self.fondo.reparentTo(self.render)
-        self.fondo.setScale(0.27, 0.01, 0.32)
-        self.fondo.setPos(0, 7, 0)
-        font = loader.loadFont('./fonts/comic/comic.ttf')
-        self.TextInsertName = OnscreenText(font=font, text='Ingrese su nombre:', pos=(
-            -0.5, 0.02), scale=0.07, fg=(143/255, 250/255, 2/255, 1))
-        self.TextFullScreen = OnscreenText(
-            font=font, text='Fulscreen:', pos=(-0.99, -0.67), scale=0.04, fg=(143/255, 250/255, 2/255, 1))
-        self.TextInsertNameInput = DirectEntry(
-            text="", scale=.05, numLines=1, focus=1)
-        self.ButtonInsertName = DirectButton(text=("Insertar nombre"), scale=.05, pos=(
-            0.25, 0, -0.10), command=self.getPlayerName)
-        self.InvisibleButton = DirectButton(
-            text=("*"), scale=.05, pos=(-1, 5, -0.73), command=self.setFullScreen)
-        self.InvisibleButton.bind(WITHIN, command=self.mouseOver)
-
-
-
+    
 
 Game = Tijuana2033()
 Game.run()
