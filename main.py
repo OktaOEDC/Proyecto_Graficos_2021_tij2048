@@ -38,71 +38,31 @@ story = [
             "El SOYBOI PARTY ha remplazado al partido libertariano como la astilla de circulo politico en Washington "],
         ["Mandato numero 1984 permite el uso continuo en espacios publicos de mascaras de cobertura completa tras la pandemia de 2022 de covid-21"]]
 
-
-def cleanUp(task):
-    global taskAccumulator
-    print("Task func has accumulated %d" % taskAccumulator)
-    # Reset the accumulator
-    taskAccumulator = 0
-
-    # A task that runs forever
-
-
-def taskFunc(task):
-    global taskAccumulator
-    taskAccumulator += 1
-    return task.cont
-
-
-def taskStop(task):
-    taskMgr.remove('Accumulator')
-
-
 class Tijuana2033(ShowBase, FSM):
     def __init__(self):
         ShowBase.__init__(self)
         FSM.__init__(self, "FSM-Game")
         # self.win
-        render.setShaderAuto()
-        self.render.setAntialias(AntialiasAttrib.MAuto)
         self.playerName = ""
         self.IsFullScreen = False
         self.blade_runner = player.Player(self.playerName)
         self.disableMouse()
-        ##
         self.plight = PointLight("plight")
         self.plight.setColor((1, 1, 1, 1))
         self.plnp = self.render.attachNewNode(self.plight)
         self.render.setLight(self.plnp)
-        # get the displays width and height for later usage
-        # self.dispWidth = self.pipe.getDisplayWidth()
-        # props = WindowProperties()
-        # self.dispHeight = self.pipe.getDisplayHeight()
-        # props.setSize(self.dispWidth, self.dispHeight)
-        # base.win.requestProperties(props)
-        # ESTA ES LA SECUENCIA DE LO QUE QUIERO HACER, PERO NO SE COMO HACER QUE OCURRAN UNA DE OTRA DE FORMA TEMPORAZIDA O CONDICIONAL SIN BOTONES
-
+        
+        
         self.intro = logoscreen.Logoscreen()
         self.intro.start()
-        self.accept('enter', self.intro.stop)
-
-        self.crawl = testlevel.testCrawl()
-        self.accept('enter', self.crawl.start)
-
-        self.accept('enter', self.Main_menu)
-
-        self.l1 = level1.Level1()
-        #self.accept('enter',self.l1.start)
         
-        # self.l1.stop()
-        # self.accept('enter',self.l1.start)
+        self.crawl = testlevel.testCrawl()
+        self.accept('space', self.crawl.start)
+        self.accept('space', self.crawl.stop)
 
-        # self.accept('enter',self.crawl.stop)
+        #self.accept('enter', self.Main_menu)
 
-        # taskMgr.add(self.crawl,uponDeath=cleanUp)
-        #taskMgr.add(self.Main_menu, 'first', sort=1, uponDeath=cleanUp)
-        #taskMgr.add(self.transition, 'trans', sort=2, uponDeath=cleanUp)
-        #taskMgr.add(self.level1, 'level1', sort=2, uponDeath=cleanUp)
+        #self.l1 = level1.Level1()
 
     def mouseOver(self, argumento):
         rotation_interval = self.fullScreenShape.hprInterval(
