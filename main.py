@@ -62,28 +62,14 @@ class Tijuana2033(ShowBase, FSM):
         self.accept('1',self.crawl.start)
         
         self.menu = menu.Menu()
-        self.accept('2',self.menu.start())
+        self.accept('2',self.menu.start)
 
-        #self.l1 = level1.Level1()
-
-    def mouseOver(self, argumento):
-        rotation_interval = self.fullScreenShape.hprInterval(
-            10, Vec3(360, 0, 0))
-        rotation_interval.start()
-
+        self.l1 = level1.Level1()
+        self.accept('3',self.l1.start)
 
  
-    def setFullScreen(self):
-        # props = WindowProperties()
-        # if(self.IsFullScreen == True):
-        #      props.fullscreen = False
-        #      self.IsFullScreen = False
-        #  else:
-        #      props.fullscreen = True
-        #      self.IsFullScreen = True
-        #  self.win.requestProperties(props)
-        pass
 
+        
     
 
 Game = Tijuana2033()

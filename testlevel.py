@@ -1,3 +1,4 @@
+from pynput.keyboard import Key, Controller
 
 from direct.particles.ParticleEffect import ParticleEffect
 from direct.showbase.ShowBase import *
@@ -9,13 +10,9 @@ from direct.task import Task
 
 class testCrawl:
     def __init__(self):
-        self.objects = []
-        self.fullScreenShape = loader.loadModel(
-            "models/fullscreen_shape.bam")
-        self.fullScreenShape.reparentTo(render)
-        self.fullScreenShape.setScale(0.25, 0.25, 0.25)
-        self.fullScreenShape.setPos(-1.5, 6, -1)
-        self.fullScreenShape.hide()
+        self.text_pointers = []
+        self.keyboard = Controller()
+        self.objects = [] 
         self.fondo = loader.loadModel("./models/fondo_menu.bam")
         self.fondo.reparentTo(render)
         self.fondo.setScale(0.6, 0.6, 0.6)
@@ -37,15 +34,15 @@ class testCrawl:
     def start(self):
         print('[*] Started text crawl!')
         self.ambientSound.play()
-        self.fullScreenShape.show()
         self.crawl()
 
     def stop(self):
-        self.fullScreenShape.hide()
         render.clearLight()
         self.ambientSound.stop()
         for obj in self.objects:
             obj.removeNode()
+        self.keyboard.press('2' )
+        self.keyboard.release('2' )
         self.__del__()
     def auxstop(self,task):
         self.stop()

@@ -56,11 +56,9 @@ class Logoscreen:
             letter.removeNode()
         self.keyboard.press('1' )
         self.keyboard.release('1' )
-        
         self.__del__()
 
     def text(self):
-
         posx = -1
         posy = 0.0
         delay = 0.1
@@ -79,4 +77,5 @@ class Logoscreen:
         # print(self.putchar.getPos())
 
 
-    def yamlplayer()
+    def yamlplayer():
+        pass

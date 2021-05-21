@@ -13,6 +13,9 @@ class Level1:
     def __init__(self):
         base.cam2dp.node().getDisplayRegion(0).setSort(-20)
         
+        
+        
+    def start(self):
         #load
         self.Nivel1 = loader.loadModel("models/Campestre_light.bam")
         self.Nivel1.reparentTo(render)
@@ -27,15 +30,12 @@ class Level1:
         self.background = OnscreenImage(
             parent=render2dp, image="textures/Skunight.png")  # Load an image object
         
-        
-    def start(self):
-        
         color = (0.8, 0.8, 0.8)
         self.linfog = Fog("Scene-wide exponential Fog object")
         self.linfog.setColor(*color)
         self.linfog.setLinearRange(0, 25)
         self.linfog.setLinearFallback(45, 160, 320)
-        self.render.setFog(linfog)
+        render.setFog(self.linfog)
         base.setBackgroundColor(*color)
         self.plight_lv1 = PointLight("plight")
         self.plight_lv1.setColor((1, 1, 1, 1))
@@ -44,6 +44,8 @@ class Level1:
         self.plnp_lv1.setPos(0.33, 6, 4)
         self.setLight(self.plnp_lv1)
         
+    def __del__(self):
+            print('[*] Destructor called')
 
 
 

@@ -1,7 +1,4 @@
-import logging
-import os
-import time
-
+from pynput.keyboard import Key, Controller
 from direct.fsm.FSM import FSM
 from direct.gui.DirectButton import DirectButton
 from direct.gui.DirectEntry import DirectEntry
@@ -21,18 +18,35 @@ import textcrawl
 import testlevel
 import logoscreen
 import level1
-loadPrcFile("config/conf.prc")
 
 
 class Menu:
     def __init__(self):
-        self.fullScreenShape = self.loader.loadModel(
+        self.text_pointers = []
+        self.keyboard = Controller()
+        # self.TextInsertName.reparentTo(render)
+        # self.TextInsertNameInput.reparentTo(render)
+        # self.TextFullScreen.reparentTo(render)
+        # self.ButtonInsertName.reparentTo(render)
+        # self.InvisibleButton.reparentTo(render)
+        # self.fullScreenShape.hide()
+        # self.fondo.hide()
+        # self.TextInsertName.hide()
+        # self.TextInsertNameInput.hide()
+        # self.TextFullScreen.hide()
+        # self.ButtonInsertName.hide()
+        # self.InvisibleButton.hide()
+    def __del__(self):
+        print('Destructor called')
+
+    def start(self):
+        self.fullScreenShape = loader.loadModel(
             "models/fullscreen_shape.bam")
-        self.fullScreenShape.reparentTo(self.render)
+        self.fullScreenShape.reparentTo(render)
         self.fullScreenShape.setScale(0.25, 0.25, 0.25)
         self.fullScreenShape.setPos(-1.5, 6, -1)
-        self.fondo = self.loader.loadModel("models/fondo_menu.bam")
-        self.fondo.reparentTo(self.render)
+        self.fondo = loader.loadModel("models/fondo_menu.bam")
+        self.fondo.reparentTo(render)
         self.fondo.setScale(0.27, 0.01, 0.32)
         self.fondo.setPos(0, 7, 0)
         font = loader.loadFont('./fonts/comic/comic.ttf')
@@ -47,13 +61,15 @@ class Menu:
         self.InvisibleButton = DirectButton(
             text=("*"), scale=.05, pos=(-1, 5, -0.73), command=self.setFullScreen)
         self.InvisibleButton.bind(WITHIN, command=self.mouseOver)
-    
-    def __del__(self):
-        print('Destructor called')
-        
-    def start(self):
-        pass
-    
+        self.fullScreenShape.reparentTo(render)
+        self.fondo.reparentTo(render)
+        self.TextInsertNameInput.show()
+        self.fullScreenShape.show()
+        self.fondo.show()
+        self.TextInsertName.show()
+        self.TextFullScreen.show()
+        self.ButtonInsertName.show()
+        self.InvisibleButton.show()
     def stop(self):
         self.fullScreenShape.hide()
         self.fondo.hide()
@@ -62,21 +78,32 @@ class Menu:
         self.ButtonInsertName.hide()
         self.InvisibleButton.hide()
         self.TextInsertNameInput.hide()
+        self.keyboard.press('3' )
+        self.keyboard.release('3' )
         self.__del__()
-    
-      def getPlayerName(self):
+
+    def getPlayerName(self):
         self.playerName = self.TextInsertNameInput.get()
         self.blade_runner = player.Player(self.playerName)
         print('Hola', self.blade_runner.get_name(), 'bienvenido a TIJUANA 2033')
         # Remover el menu principal
         self.blade_runner = player.Player(self.playerName)
-        print('Hola', self.blade_runner.get_name(), 'bienvenido a TIJUANA 2033')      
-        # self.render.clearLight()
-        # self.plnp.removeNode()
-        # self.fondo.removeNode()
-        # self.fullScreenShape.removeNode()
-        # self.TextInsertName.removeNode()
-        # self.TextInsertNameInput.removeNode()
-        # self.ButtonInsertName.removeNode()
-        # self.InvisibleButton.removeNode()
-        # self.TextFullScreen.removeNode()
+        print('Hola', self.blade_runner.get_name(), 'bienvenido a TIJUANA 2033')
+        self.stop()
+
+
+    def mouseOver(self, argumento):
+        rotation_interval = self.fullScreenShape.hprInterval(
+            10, Vec3(360, 0, 0))
+        rotation_interval.start()
+
+    def setFullScreen(self):
+        # props = WindowProperties()
+        # if(self.IsFullScreen == True):
+        #      props.fullscreen = False
+        #      self.IsFullScreen = False
+        #  else:
+        #      props.fullscreen = True
+        #      self.IsFullScreen = True
+        #  self.win.requestProperties(props)
+        pass
