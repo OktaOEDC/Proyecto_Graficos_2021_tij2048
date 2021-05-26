@@ -1,3 +1,4 @@
+import yaml
 import logging
 from direct.showbase.ShowBase import ShowBase
 logging.basicConfig(level=logging.DEBUG,
@@ -63,7 +64,7 @@ class Player:
         self.pos = {}
         self.flags = {'anarquista': False, 'libertariano': False, 'fascista': False,
                       'comunista': False, 'neoliberal': False, 'populista': False, 'autoritario': False}
-        
+
         self.mode_amlo()
         self.mode_mexico()
         self.mode_pri()
@@ -173,3 +174,20 @@ class Player:
             self.flags['fascista']
             logging.debug('El jugador es Fascista')
 
+    def readyaml(self):
+        """SAVEFILE GENERATOR
+        """
+        file = open("./player.yaml", 'r')
+        dictionary = yaml.load(file)
+        for key, value in dictionary.items():
+            print(key, ":", str(value))
+        return dictionary
+
+    def yaml_to_player(self,dictionary):
+        self.name = dictionary['nombre']
+        self.wallet = dictionary['wallet']
+        self.vidas = dictionary['vidas']
+        self.politica = dictionary['politica']
+        self.educacion = dictionary['educacion']
+        self.popularidad = dictionary['popularidad']
+        self.mascara = dictionary['mascara']
