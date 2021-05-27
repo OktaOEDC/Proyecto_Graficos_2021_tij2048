@@ -37,7 +37,7 @@ class Level1:
         color = (0.8, 0.8, 0.8)
         self.linfog = Fog("Scene-wide exponential Fog object")
         self.linfog.setColor(*color)
-        self.linfog.setLinearRange(0, 15)
+        self.linfog.setLinearRange(0, 35)
         self.linfog.setLinearFallback(45, 160, 320)
         render.setFog(self.linfog)
         base.setBackgroundColor(*color)
@@ -55,10 +55,31 @@ class Level1:
 
     def buttons(self):
         self.button1 = DirectButton(
-            text=("OPTION 1"), text_font=self.runner_font, scale=0.1, pos=(0,0,0), frameTexture=None,command=self.stop, relief=DGG.FLAT)
+            text=("OPTION 1"), 
+            text_font=self.runner_font, 
+            scale=0.1, 
+            pos=(-1, -5, -0.75), 
+            frameTexture=None,
+            command=self.stop, 
+            relief=DGG.FLAT)
 
-        self.option = DirectButton(
-            text=("Option 2"), text_font=self.runner_font, scale=0.1, pos=(0,-15,0), frameTexture=None, command=self.stop, relief=DGG.FLAT)
+        self.option2 = DirectButton(
+            text=("Option 2"), 
+            text_font=self.runner_font, 
+            scale=0.1, 
+            pos=(0, -5, -0.75), 
+            frameTexture=None, 
+            command=self.stop, 
+            relief=DGG.FLAT)
+
+        self.option3 = DirectButton(
+            text=("Option 3"), 
+            text_font=self.runner_font, 
+            scale=0.1, 
+            pos=(1, -5, -0.75), 
+            frameTexture=None, 
+            command=self.stop, 
+            relief=DGG.FLAT)
         
         
     def onClick(self):
