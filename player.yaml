@@ -1,21 +1,16 @@
----
-nombre: julio
-wallet: 0
-vidas: 3
-politica: 0
 educacion: 0
-popularidad: 0
-mascara: 0
-xx: 0
-yy: 0
-pos:
-  xpos: 0
-  ypos: 0
 flags:
-  anarquista:false
-  libertariano:false
-  fascista:false
-  comunista:false
-  neoliberal:false
-  populista:false
-  autoritario:false
+  anarquista: false
+  autoritario: false
+  comunista: false
+  fascista: false
+  libertariano: false
+  neoliberal: false
+mascara: 0
+name: omar
+politica: 0
+popularidad: 0
+vidas: 1
+wallet: 0
+xx: 10
+yy: 12

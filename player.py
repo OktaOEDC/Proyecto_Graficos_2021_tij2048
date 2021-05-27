@@ -5,7 +5,12 @@ logging.basicConfig(level=logging.DEBUG,
                     format='%(levelname)s - %(message)s')
 
 
-class Player:
+class Player:  
+    """Player class.
+
+    Returns:
+        [class]: [player class methods and attributes]
+    """
     phil_dict = {"Dios": "teologica",
                  "'Griegos'": "naturalista",
                  "Democrito": "democratico",
@@ -52,6 +57,10 @@ class Player:
                    "Magon": "Anarquismo"}
 
     def __init__(self, name):
+        """Initiates player class.
+        Args:
+            name ([init]): [Takes in name of player]
+        """
         self.name = name
         self.wallet = 0
         self.vidas = 3
@@ -61,7 +70,6 @@ class Player:
         self.mascara = 0
         self.xx = 0
         self.yy = 0
-        self.pos = {}
         self.flags = {'anarquista': False, 'libertariano': False, 'fascista': False,
                       'comunista': False, 'neoliberal': False, 'populista': False, 'autoritario': False}
 
@@ -87,7 +95,7 @@ class Player:
             self.flags['populista'] = True
         if self.flags['populista'] == True:
             self.wallet = 0
-            self.nombre = 'Andres Manuel'
+            self.name = 'Andres Manuel'
             logging.debug('MORENA!')
             logging.debug('HORA DE HACER UN TREN PLEBE')
 
@@ -184,18 +192,34 @@ class Player:
         return dictionary
 
     def makedict(self):
-        dictionary={'nombre':self.nombre,'wallet':self.wallet,
-                    'vidas':self.vidas,'politica':self.politica,
-                    'educacion':self.educacion,'popularidad':self.popularidad,'mascara':self.mascara,'xx':self.xx,'yy':self.yy,'pos':{}}
-    
-    def yaml_to_player(self,dictionary):
-        self.name = dictionary['nombre']
+        dictionary = {'name': self.name, 'wallet': self.wallet,
+                      'vidas': self.vidas, 'politica': self.politica,
+                      'educacion': self.educacion, 'popularidad': self.popularidad, 'mascara': self.mascara, 'xx': self.xx, 'yy': self.yy, 'flags': {
+                          'anarquista': self.flags['anarquista'],
+                          'libertariano': self.flags['libertariano'],
+                          'fascista': self.flags['fascista'],
+                          'comunista': self.flags['comunista'],
+                          'neoliberal': self.flags['populista'],
+                          'autoritario': self.flags['autoritario']
+                      }
+                      }
+        return dictionary
+
+    def yaml_to_player(self, dictionary):
+        self.name = dictionary['name']
         self.wallet = dictionary['wallet']
         self.vidas = dictionary['vidas']
         self.politica = dictionary['politica']
         self.educacion = dictionary['educacion']
         self.popularidad = dictionary['popularidad']
         self.mascara = dictionary['mascara']
-    def player_to_yaml(self,dictionary):
-        file = open('player.yaml','w+')
-        yaml.dump(dictionary)
+
+    def player_to_yaml(self, dictionary):
+        with open('player.yaml','w') as file:
+            yaml.dump(dictionary,file)
+
+    def savefile(self):
+        self.player_to_yaml(self.makedict())
+        
+    def loadfile(self):
+        self.yaml_to_player(self.readyaml)
