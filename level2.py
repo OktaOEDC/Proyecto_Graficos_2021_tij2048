@@ -14,14 +14,14 @@ from direct.gui.DirectGuiGlobals import WITHIN
 from direct.gui.OnscreenText import OnscreenText
 from direct.gui.DirectGui import *
 
-class Level1:
+class Level2:
     def __init__(self):
         base.cam2dp.node().getDisplayRegion(0).setSort(-20)
         self.runner_font = loader.loadFont('./fonts/runner/BLADRMF_.TTF')
 
     def start(self):
         # load
-        self.Nivel1 = loader.loadModel("models/Campestre_light.bam")
+        self.Nivel1 = loader.loadModel("./models/Estacionamiento_monumental_Short-9vcfs2t/")
         self.Nivel1.reparentTo(render)
         self.Nivel1.setScale(1, 1, 1)
         self.Nivel1.setPos(0, 0, 0)

@@ -19,7 +19,7 @@ from panda3d.core import *
 from direct.showbase.Loader import Loader
 import player
 import textcrawl
-import testlevel
+import crawl
 import logoscreen
 import level1
 loadPrcFile("config/conf.prc")
@@ -58,7 +58,7 @@ class Tijuana2033(ShowBase, FSM):
         self.intro = logoscreen.Logoscreen()
         self.intro.start()
         
-        self.crawl = testlevel.testCrawl()
+        self.crawl = crawl.testCrawl()
         self.accept('1',self.crawl.start)
         
         self.menu = menu.Menu()
