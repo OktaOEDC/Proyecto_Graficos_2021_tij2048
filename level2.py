@@ -13,22 +13,22 @@ from direct.gui.DirectButton import DirectButton
 from direct.gui.DirectGuiGlobals import WITHIN
 from direct.gui.OnscreenText import OnscreenText
 from direct.gui.DirectGui import *
-
+import player
 class Level2:
     def __init__(self):
         base.cam2dp.node().getDisplayRegion(0).setSort(-20)
         self.runner_font = loader.loadFont('./fonts/runner/BLADRMF_.TTF')
-
+        player1 = player.Player()
     def start(self):
         # load
-        self.Nivel1 = loader.loadModel("./models/fullscreen_shape.bam")
-        self.Nivel1.reparentTo(render)
-        self.Nivel1.setScale(1, 1, 1)
-        self.Nivel1.setPos(0, 0, 0)
+        self.model = loader.loadModel("./models/CECUT.bam")
+        self.model.reparentTo(render)
+        self.model.setScale(1, 1, 1)
+        self.model.setPos(0, 0, 0)
 
         # start
         camera.setPos(-2,2, 4)
-        camera.lookAt(self.Nivel1)
+        camera.lookAt(self.model)
 
         # start
         self.background = OnscreenImage(
@@ -41,10 +41,9 @@ class Level2:
         self.linfog.setLinearFallback(45, 160, 320)
         render.setFog(self.linfog)
         base.setBackgroundColor(*color)
-        self.plight_lv1 = PointLight("plight")
-        self.plight_lv1.setColor((1, 1, 1, 1))
-
-        self.plight_lv1.setAttenuation((1, 0, 1))
+        self.plight = PointLight("plight")
+        self.plight.setColor((1, 1, 1, 1))
+        self.plight.setAttenuation((1, 0, 1))
 
         
         self.buttons()

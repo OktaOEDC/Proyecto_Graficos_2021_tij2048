@@ -24,22 +24,13 @@ class Menu:
     def __init__(self):
         self.text_pointers = []
         self.keyboard = Controller()
-        # self.TextInsertName.reparentTo(render)
-        # self.TextInsertNameInput.reparentTo(render)
-        # self.TextFullScreen.reparentTo(render)
-        # self.ButtonInsertName.reparentTo(render)
-        # self.InvisibleButton.reparentTo(render)
-        # self.fullScreenShape.hide()
-        # self.fondo.hide()
-        # self.TextInsertName.hide()
-        # self.TextInsertNameInput.hide()
-        # self.TextFullScreen.hide()
-        # self.ButtonInsertName.hide()
-        # self.InvisibleButton.hide()
+        player1 = player.Player()
+
     def __del__(self):
         print('Destructor called')
 
     def start(self):
+        
         self.fullScreenShape = loader.loadModel(
             "models/fullscreen_shape.bam")
         self.fullScreenShape.reparentTo(render)

@@ -22,6 +22,7 @@ import textcrawl
 import crawl
 import logoscreen
 import level1
+import level2
 loadPrcFile("config/conf.prc")
 
 
@@ -66,6 +67,9 @@ class Tijuana2033(ShowBase, FSM):
 
         self.l1 = level1.Level1()
         self.accept('3',self.l1.start)
+        
+        self.l2 = level2.Level2()
+        self.accept('4',self.l2.start)
 
  
 

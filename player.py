@@ -183,6 +183,11 @@ class Player:
             print(key, ":", str(value))
         return dictionary
 
+    def makedict(self):
+        dictionary={'nombre':self.nombre,'wallet':self.wallet,
+                    'vidas':self.vidas,'politica':self.politica,
+                    'educacion':self.educacion,'popularidad':self.popularidad,'mascara':self.mascara,'xx':self.xx,'yy':self.yy,'pos':{}}
+    
     def yaml_to_player(self,dictionary):
         self.name = dictionary['nombre']
         self.wallet = dictionary['wallet']
@@ -191,3 +196,6 @@ class Player:
         self.educacion = dictionary['educacion']
         self.popularidad = dictionary['popularidad']
         self.mascara = dictionary['mascara']
+    def player_to_yaml(self,dictionary):
+        file = open('player.yaml','w+')
+        yaml.dump(dictionary)
