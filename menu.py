@@ -15,7 +15,7 @@ from panda3d.core import *
 from direct.showbase.Loader import Loader
 import player
 import textcrawl
-import testlevel
+import crawl
 import logoscreen
 import level1
 
