@@ -21,7 +21,7 @@ class Level2:
 
     def start(self):
         # load
-        self.Nivel1 = loader.loadModel("./models/Estacionamiento_monumental_Short-9vcfs2t/")
+        self.Nivel1 = loader.loadModel("./models/fullscreen_shape.bam")
         self.Nivel1.reparentTo(render)
         self.Nivel1.setScale(1, 1, 1)
         self.Nivel1.setPos(0, 0, 0)
