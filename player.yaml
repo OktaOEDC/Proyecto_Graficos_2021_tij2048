@@ -1,4 +1,4 @@
-educacion: 5
+educacion: 1
 flags:
   anarquista: false
   autoritario: false
@@ -8,7 +8,7 @@ flags:
   neoliberal: false
 mascara: 0
 name: username
-politica: 9
+politica: 1
 popularidad: 0
 vidas: 1
 wallet: 0

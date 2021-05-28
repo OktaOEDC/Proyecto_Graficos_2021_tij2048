@@ -62,7 +62,7 @@ class Level2:
             text=("Good Bunny"),
             text_font=self.runner_font,
             scale=0.1,
-            pos=(-1, -5, -0.75),
+            pos=(-0, -5, -0.75),
             frameTexture=None,
             command=self.onClick1,
             relief=DGG.FLAT)
@@ -71,7 +71,7 @@ class Level2:
             text=("Los Demonios de Ecatepan"),
             text_font=self.runner_font,
             scale=0.1,
-            pos=(0, -5, -0.75),
+            pos=(0, -5, -0.55),
             frameTexture=None,
             command=self.onClick2,
             relief=DGG.FLAT)
@@ -80,7 +80,7 @@ class Level2:
             text=("La filarmonica de Ensenada"),
             text_font=self.runner_font,
             scale=0.1,
-            pos=(1, -5, -0.75),
+            pos=(0, -5, -0.35),
             frameTexture=None,
             command=self.onClick3,
             relief=DGG.FLAT)
