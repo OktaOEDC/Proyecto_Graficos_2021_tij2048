@@ -29,10 +29,10 @@ class Level2:
         self.level2 = loader.loadModel("models/CECUT.bam")
         self.level2.reparentTo(render)
         self.level2.setScale(1, 1, 1)
-        self.level2.setPos(0, 0, 0)
+        self.level2.setPos(0,0, 0)
 
         # start
-        camera.setPos(0, 0, 0)
+        camera.setPos(0.5,-8.5,4)
         camera.lookAt(self.level2)
 
         # start
