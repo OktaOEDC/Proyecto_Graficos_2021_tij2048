@@ -56,16 +56,16 @@ class Player:
                    "Chomsky": "Medios",
                    "Magon": "Anarquismo"}
 
-    def __init__(self, name='username'):
+    def __init__(self, name='username',wallet=0,vidas=3,politica=0,educacion=0,popularidad=0,mascara=0,xx=0,yy=00):
         self.name = name
-        self.wallet = 0
-        self.vidas = 3
-        self.politica = 0
-        self.educacion = 0
-        self.popularidad = 0
-        self.mascara = 0
-        self.xx = 0
-        self.yy = 0
+        self.wallet = wallet
+        self.vidas = vidas
+        self.politica = politica
+        self.educacion = educacion
+        self.popularidad = popularidad
+        self.mascara = mascara
+        self.xx = xx
+        self.yy = yy
         self.flags = {'anarquista': False, 'libertariano': False, 'fascista': False,
                       'comunista': False, 'neoliberal': False, 'populista': False, 'autoritario': False}
 
@@ -127,20 +127,20 @@ class Player:
         Args:
             change ([bool]): [Boolean que indica mascara puesta o no]
         """
-        if change is bool:
+        if change is int:
             self.politica = change
         else:
-            logging.debug('change de POP no es boolean')
+            logging.debug('change de POP no es int')
 
-    def change_pol(self, change):
-        """Funcion que suma o resta los puntos del atributo politica
+    def change_mascara(self, change):
+        """Funcion que quita o remueve la mascara del jugador
         Args:
-            change ([int]): [Numero entero negativo o positivo]
+            change ([bool]): [Boolean que indica mascara puesta o no]
         """
-        if change is int:
-            self.politica += change
+        if change is bool:
+            self.mascara = change
         else:
-            logging.debug('change no es entero')
+            logging.debug('change de POP no es int')
 
     def get_name(self):
         return self.name

@@ -18,8 +18,8 @@ class Level1:
     def __init__(self):
         base.cam2dp.node().getDisplayRegion(0).setSort(-20)
         self.runner_font = loader.loadFont('./fonts/runner/BLADRMF_.TTF')
-        self.p1 = player.Player()
-        
+        self.p1 = player.Player(self.p1.loadfile())
+
     def start(self):
         # load
         self.level1 = loader.loadModel("models/Campestre_light.bam")
@@ -46,50 +46,64 @@ class Level1:
         self.plight.setColor((1, 1, 1, 1))
         self.plight.setAttenuation((1, 0, 1))
 
-        
+
         self.buttons()
-        
+
 
     def __del__(self):
         print('[*] Destructor called')
 
     def buttons(self):
         self.option1 = DirectButton(
-            text=("OPTION 1"), 
-            text_font=self.runner_font, 
-            scale=0.1, 
-            pos=(-1, -5, -0.75), 
+            text=("OPTION 1"),
+            text_font=self.runner_font,
+            scale=0.1,
+            pos=(-1, -5, -0.75),
             frameTexture=None,
-            command=self.stop, 
+            command=self.onClick1,
             relief=DGG.FLAT)
 
         self.option2 = DirectButton(
-            text=("Option 2"), 
-            text_font=self.runner_font, 
-            scale=0.1, 
-            pos=(0, -5, -0.75), 
-            frameTexture=None, 
-            command=self.stop, 
+            text=("Option 2"),
+            text_font=self.runner_font,
+            scale=0.1,
+            pos=(0, -5, -0.75),
+            frameTexture=None,
+            command=self.onClick2,
             relief=DGG.FLAT)
 
         self.option3 = DirectButton(
-            text=("Option 3"), 
-            text_font=self.runner_font, 
-            scale=0.1, 
-            pos=(1, -5, -0.75), 
-            frameTexture=None, 
-            command=self.stop, 
+            text=("Option 3"),
+            text_font=self.runner_font,
+            scale=0.1,
+            pos=(1, -5, -0.75),
+            frameTexture=None,
+            command=onClick3,
             relief=DGG.FLAT)
-    
-        
-    def onClick1(self, ):
+
+    def onClick1(self):
         print("[*] Click!")
+        self.p1.change_pol(1)
+        self.p1.change_edu(1)
+        self.p1.change_pop(1)
+        self.stop()
+
     def onClick2(self):
         print("[*] Click!")
+        self.p1.change_pol(1)
+        self.p1.change_edu(2)
+        self.p1.change_pop(3)
+        self.stop()
+
     def onClick3(self):
         print("[*] Click!")
+        self.p1.change_pol(0)
+        self.p1.change_edu(5)
+        self.p1.change_pop(9)
+        self.stop()
 
     def stop(self):
+        self.p1.savefile()
         NodePath.remove_node(self.option1)
         NodePath.remove_node(self.option2)
         NodePath.remove_node(self.option3)
