@@ -56,11 +56,7 @@ class Player:
                    "Chomsky": "Medios",
                    "Magon": "Anarquismo"}
 
-    def __init__(self, name):
-        """Initiates player class.
-        Args:
-            name ([init]): [Takes in name of player]
-        """
+    def __init__(self, name='username'):
         self.name = name
         self.wallet = 0
         self.vidas = 3
@@ -206,7 +202,7 @@ class Player:
         return dictionary
 
     def yaml_to_player(self, dictionary):
-        self.name = dictionary['name']
+        self.name = dictionary.get('name')
         self.wallet = dictionary['wallet']
         self.vidas = dictionary['vidas']
         self.politica = dictionary['politica']
@@ -222,4 +218,4 @@ class Player:
         self.player_to_yaml(self.makedict())
         
     def loadfile(self):
-        self.yaml_to_player(self.readyaml)
+        self.yaml_to_player(self.readyaml())

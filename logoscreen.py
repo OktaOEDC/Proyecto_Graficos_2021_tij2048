@@ -76,6 +76,3 @@ class Logoscreen:
         self.text_pointers.append(self.putchar)
         # print(self.putchar.getPos())
 
-
-    def yamlplayer():
-        pass

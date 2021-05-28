@@ -1,16 +1,16 @@
 educacion: 0
 flags:
-  anarquista: false
+  anarquista: true
   autoritario: false
   comunista: false
   fascista: false
   libertariano: false
   neoliberal: false
 mascara: 0
-name: omar
+name: Julio
 politica: 0
 popularidad: 0
-vidas: 1
+vidas: 11
 wallet: 0
 xx: 10
 yy: 12

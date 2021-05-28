@@ -24,7 +24,6 @@ class Menu:
     def __init__(self):
         self.text_pointers = []
         self.keyboard = Controller()
-        player1 = player.Player()
 
     def __del__(self):
         print('Destructor called')
@@ -48,7 +47,7 @@ class Menu:
         self.TextInsertNameInput = DirectEntry(
             text="", scale=.05, numLines=1, focus=1)
         self.ButtonInsertName = DirectButton(text=("Insertar nombre"), scale=.05, pos=(
-            0.25, 0, -0.10), command=self.getPlayerName)
+            0.25, 0, -0.10), command=self.make_player)
         self.InvisibleButton = DirectButton(
             text=("*"), scale=.05, pos=(-1, 5, -0.73), command=self.setFullScreen)
         self.InvisibleButton.bind(WITHIN, command=self.mouseOver)
@@ -73,16 +72,6 @@ class Menu:
         self.keyboard.release('3' )
         self.__del__()
 
-    def getPlayerName(self):
-        self.playerName = self.TextInsertNameInput.get()
-        self.blade_runner = player.Player(self.playerName)
-        print('Hola', self.blade_runner.get_name(), 'bienvenido a TIJUANA 2033')
-        # Remover el menu principal
-        self.blade_runner = player.Player(self.playerName)
-        print('Hola', self.blade_runner.get_name(), 'bienvenido a TIJUANA 2033')
-        self.stop()
-
-
     def mouseOver(self, argumento):
         rotation_interval = self.fullScreenShape.hprInterval(
             10, Vec3(360, 0, 0))
@@ -98,3 +87,7 @@ class Menu:
         #      self.IsFullScreen = True
         #  self.win.requestProperties(props)
         pass
+
+    def make_player(self,name):      
+        self.player = player.Player(self.TextInsertNameInput.get())
+        self.player.savefile()

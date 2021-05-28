@@ -13,22 +13,23 @@ from direct.gui.DirectButton import DirectButton
 from direct.gui.DirectGuiGlobals import WITHIN
 from direct.gui.OnscreenText import OnscreenText
 from direct.gui.DirectGui import *
-
+import player
 class Level1:
     def __init__(self):
         base.cam2dp.node().getDisplayRegion(0).setSort(-20)
         self.runner_font = loader.loadFont('./fonts/runner/BLADRMF_.TTF')
-
+        self.p1 = player.Player()
+        
     def start(self):
         # load
-        self.Nivel1 = loader.loadModel("models/Campestre_light.bam")
-        self.Nivel1.reparentTo(render)
-        self.Nivel1.setScale(1, 1, 1)
-        self.Nivel1.setPos(0, 0, 0)
+        self.level1 = loader.loadModel("models/Campestre_light.bam")
+        self.level1.reparentTo(render)
+        self.level1.setScale(1, 1, 1)
+        self.level1.setPos(0, 0, 0)
 
         # start
         camera.setPos(-2,2, 4)
-        camera.lookAt(self.Nivel1)
+        camera.lookAt(self.level1)
 
         # start
         self.background = OnscreenImage(
@@ -41,10 +42,9 @@ class Level1:
         self.linfog.setLinearFallback(45, 160, 320)
         render.setFog(self.linfog)
         base.setBackgroundColor(*color)
-        self.plight_lv1 = PointLight("plight")
-        self.plight_lv1.setColor((1, 1, 1, 1))
-
-        self.plight_lv1.setAttenuation((1, 0, 1))
+        self.plight = PointLight("plight")
+        self.plight.setColor((1, 1, 1, 1))
+        self.plight.setAttenuation((1, 0, 1))
 
         
         self.buttons()
@@ -54,7 +54,7 @@ class Level1:
         print('[*] Destructor called')
 
     def buttons(self):
-        self.button1 = DirectButton(
+        self.option1 = DirectButton(
             text=("OPTION 1"), 
             text_font=self.runner_font, 
             scale=0.1, 
@@ -80,10 +80,22 @@ class Level1:
             frameTexture=None, 
             command=self.stop, 
             relief=DGG.FLAT)
+    
         
-        
-    def onClick(self):
+    def onClick1(self, ):
+        print("[*] Click!")
+    def onClick2(self):
+        print("[*] Click!")
+    def onClick3(self):
         print("[*] Click!")
 
     def stop(self):
+        NodePath.remove_node(self.option1)
+        NodePath.remove_node(self.option2)
+        NodePath.remove_node(self.option3)
+        render.clearLight()
+        NodePath.remove_node(self.level1)
+        Nodepath.remove_node(self.background)
+        Nodepath.remove_node(self.linfog)
+        NodePath.remove_node(self.plight)
         self.__del__()
