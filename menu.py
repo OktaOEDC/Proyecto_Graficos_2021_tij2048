@@ -22,9 +22,12 @@ import textcrawl
 
 
 class Menu:
-    def __init__(self):
+    def __init__(self, otherProperties, baseClass):
         self.text_pointers = []
         self.keyboard = Controller()
+        self.IsFullScreen = False
+        self.others = otherProperties
+        self.baseClass = baseClass
 
     def __del__(self):
         print('Destructor called')
@@ -80,14 +83,14 @@ class Menu:
         rotation_interval.start()
 
     def setFullScreen(self):
-        props = WindowProperties()
+        props = self.others
         if(self.IsFullScreen == True):
             props.fullscreen = False
             self.IsFullScreen = False
         else:
             props.fullscreen = True
             self.IsFullScreen = True
-        self.win.requestProperties(props)
+        self.baseClass.win.requestProperties(props)
 
     def make_player(self):
         self.player = player.Player(self.TextInsertNameInput.get())

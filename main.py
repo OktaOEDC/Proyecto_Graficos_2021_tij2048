@@ -1,3 +1,4 @@
+from direct import showbase
 import menu
 import os
 import time
@@ -57,6 +58,7 @@ class Tijuana2033(ShowBase, FSM):
         self.plight.setColor((1, 1, 1, 1))
         self.plnp = self.render.attachNewNode(self.plight)
         self.render.setLight(self.plnp)
+        self.windowProps = WindowProperties()
 
         self.intro = logoscreen.Logoscreen()
         self.intro.start()
@@ -64,7 +66,7 @@ class Tijuana2033(ShowBase, FSM):
         self.crawl = crawl.testCrawl()
         self.accept('1', self.crawl.start)
 
-        self.menu = menu.Menu()
+        self.menu = menu.Menu(self.windowProps, self)
         self.accept('2', self.menu.start)
 
         self.l1 = level1.Level1()
