@@ -184,6 +184,9 @@ class Player:
         self.edge_cases()
         values = [self.get_pol(), self.get_edu(), self.get_edu(),
                   self.get_mascara()]
+        
+        #ESTE 'VALUES' ES PARA EL DEMO
+        values = [5, 9, 4, 1]
         diferences = [0, 0, 0, 0]
         temp_dif = [0, 0, 0, 0]
         bestdif = 0
