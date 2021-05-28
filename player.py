@@ -211,8 +211,7 @@ class Player:
                     'Pareces acercarte al perfil de', key, 'como', value))
                 # worst case: no case
         if len(self.statements) < 1:
-            self.statements.append((
-                self.name, 'pareces no tener afilicion politica'))
+            self.statements.append(( 'pareces no tener afilicion politica'))
         return self.statements
 
     def readyaml(self):
