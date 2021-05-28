@@ -67,7 +67,7 @@ class Menu:
 
     def stop(self):
         self.fullScreenShape.hide()
-        self.fondo.hide()
+        self.fondo.remove_node()
         self.TextInsertName.hide()
         self.TextFullScreen.hide()
         self.ButtonInsertName.hide()

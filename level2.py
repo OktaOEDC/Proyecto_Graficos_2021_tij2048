@@ -32,7 +32,7 @@ class Level2:
         self.level2.setPos(0, 0, 0)
 
         # start
-        camera.setPos(-2, 2, 4)
+        camera.setPos(0, 0, 0)
         camera.lookAt(self.level2)
 
         # start
@@ -40,11 +40,11 @@ class Level2:
             parent=render2dp, image="textures/Skunight.png")  # Load an image object
 
         color = (0.8, 0.8, 0.8)
-        self.linfog = Fog("Scene-wide exponential Fog object")
-        self.linfog.setColor(*color)
-        self.linfog.setLinearRange(0, 35)
-        self.linfog.setLinearFallback(45, 160, 320)
-        render.setFog(self.linfog)
+        #self.linfog = Fog("Scene-wide exponential Fog object")
+        #self.linfog.setColor(*color)
+        #self.linfog.setLinearRange(0, 35)
+        #self.linfog.setLinearFallback(45, 160, 320)
+        #render.setFog(self.linfog)
         base.setBackgroundColor(*color)
         self.plight = PointLight("plight")
         self.plight.setColor((1, 1, 1, 1))
