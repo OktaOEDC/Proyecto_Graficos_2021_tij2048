@@ -15,7 +15,7 @@ from pynput.keyboard import Controller, Key
 import player
 
 
-class Level2:
+class Level3:
     def __init__(self):
         self.text_pointers = []
         self.keyboard = Controller()
@@ -26,14 +26,14 @@ class Level2:
 
     def start(self):
         # load
-        self.level2 = loader.loadModel("models/CECUT.bam")
-        self.level2.reparentTo(render)
-        self.level2.setScale(1, 1, 1)
-        self.level2.setPos(0, 0, 0)
+        self.level3 = loader.loadModel("models/Estacionamiento_Long.bam")
+        self.level3.reparentTo(render)
+        self.level3.setScale(1, 1, 1)
+        self.level3.setPos(0, 0, 0)
 
         # start
         camera.setPos(-2, 2, 4)
-        camera.lookAt(self.level2)
+        camera.lookAt(self.level3)
 
         # start
         self.background = OnscreenImage(
@@ -110,7 +110,7 @@ class Level2:
         self.option2.remove_node()
         self.option3.remove_node()
         self.background.remove_node()
-        self.level2.remove_node()
+        self.level3.remove_node()
         render.clearLight()
         self.keyboard.press('7' )
         self.keyboard.release('7' )
