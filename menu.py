@@ -30,7 +30,7 @@ class Menu:
         print('Destructor called')
 
     def start(self):
-        
+
         self.fullScreenShape = loader.loadModel(
             "models/fullscreen_shape.bam")
         self.fullScreenShape.reparentTo(render)
@@ -61,6 +61,7 @@ class Menu:
         self.TextFullScreen.show()
         self.ButtonInsertName.show()
         self.InvisibleButton.show()
+
     def stop(self):
         self.fullScreenShape.hide()
         self.fondo.hide()
@@ -69,8 +70,8 @@ class Menu:
         self.ButtonInsertName.hide()
         self.InvisibleButton.hide()
         self.TextInsertNameInput.hide()
-        self.keyboard.press('3' )
-        self.keyboard.release('3' )
+        self.keyboard.press('3')
+        self.keyboard.release('3')
         self.__del__()
 
     def mouseOver(self, argumento):
@@ -79,17 +80,16 @@ class Menu:
         rotation_interval.start()
 
     def setFullScreen(self):
-        # props = WindowProperties()
-        # if(self.IsFullScreen == True):
-        #      props.fullscreen = False
-        #      self.IsFullScreen = False
-        #  else:
-        #      props.fullscreen = True
-        #      self.IsFullScreen = True
-        #  self.win.requestProperties(props)
-        pass
+        props = WindowProperties()
+        if(self.IsFullScreen == True):
+            props.fullscreen = False
+            self.IsFullScreen = False
+        else:
+            props.fullscreen = True
+            self.IsFullScreen = True
+        self.win.requestProperties(props)
 
-    def make_player(self):      
+    def make_player(self):
         self.player = player.Player(self.TextInsertNameInput.get())
         self.player.savefile()
         self.stop()

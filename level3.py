@@ -51,13 +51,15 @@ class Level3:
         self.plight.setAttenuation((1, 0, 1))
 
         self.buttons()
-
+        self.text = OnscreenText(font=self.runner_font, text='Propone el uso de la vieja Monumental', scale=0.09, pos=[
+            0, 0.5], fg=[240, 10, 10, 1], shadow=[0.5, 0.5, 0.5, 0.5], shadowOffset=(0.04, 0.04),wordwrap=20)
+        
     def __del__(self):
         print('[*] Destructor called')
 
     def buttons(self):
         self.option1 = DirectButton(
-            text=("OPTION 1"),
+            text=("un parque"),
             text_font=self.runner_font,
             scale=0.1,
             pos=(-1, -5, -0.75),
@@ -66,7 +68,7 @@ class Level3:
             relief=DGG.FLAT)
 
         self.option2 = DirectButton(
-            text=("Option 2"),
+            text=("una maquila solar"),
             text_font=self.runner_font,
             scale=0.1,
             pos=(0, -5, -0.75),
@@ -75,7 +77,7 @@ class Level3:
             relief=DGG.FLAT)
 
         self.option3 = DirectButton(
-            text=("Option 3"),
+            text=("un terreno valdio"),
             text_font=self.runner_font,
             scale=0.1,
             pos=(1, -5, -0.75),
@@ -106,12 +108,13 @@ class Level3:
 
     def stop(self):
         self.p1.savefile()
+        self.text.remove_node()
         self.option1.remove_node()
         self.option2.remove_node()
         self.option3.remove_node()
         self.background.remove_node()
         self.level3.remove_node()
         render.clearLight()
-        self.keyboard.press('7' )
-        self.keyboard.release('7' )
+        self.keyboard.press('6' )
+        self.keyboard.release('6' )
         self.__del__()

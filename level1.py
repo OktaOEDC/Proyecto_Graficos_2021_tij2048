@@ -25,20 +25,14 @@ class Level1:
         self.p1 = player.Player()
 
     def start(self):
-        # load
         self.level1 = loader.loadModel("models/Campestre_light.bam")
         self.level1.reparentTo(render)
         self.level1.setScale(1, 1, 1)
         self.level1.setPos(0, 0, 0)
-
-        # start
         camera.setPos(-2, 2, 4)
         camera.lookAt(self.level1)
-
-        # start
         self.background = OnscreenImage(
             parent=render2dp, image="textures/Skunight.png")  # Load an image object
-
         color = (0.8, 0.8, 0.8)
         self.linfog = Fog("Scene-wide exponential Fog object")
         self.linfog.setColor(*color)
@@ -52,12 +46,15 @@ class Level1:
 
         self.buttons()
 
+        self.text = OnscreenText(font=self.runner_font, text='El emperador Hank convirtio el campo Campestre en un campo de practica para Xolos. Ahora eres alcalde:', scale=0.09, pos=[
+            0, 0.5], fg=[240, 10, 10, 1], shadow=[0.5, 0.5, 0.5, 0.5], shadowOffset=(0.04, 0.04),wordwrap=20)
+        
     def __del__(self):
         print('[*] Destructor called')
 
     def buttons(self):
         self.option1 = DirectButton(
-            text=("OPTION 1"),
+            text=("dejarlo"),
             text_font=self.runner_font,
             scale=0.1,
             pos=(-1, -5, -0.75),
@@ -66,7 +63,7 @@ class Level1:
             relief=DGG.FLAT)
 
         self.option2 = DirectButton(
-            text=("Option 2"),
+            text=("quemarlo"),
             text_font=self.runner_font,
             scale=0.1,
             pos=(0, -5, -0.75),
@@ -75,7 +72,7 @@ class Level1:
             relief=DGG.FLAT)
 
         self.option3 = DirectButton(
-            text=("Option 3"),
+            text=("adaptarlo"),
             text_font=self.runner_font,
             scale=0.1,
             pos=(1, -5, -0.75),
@@ -106,14 +103,13 @@ class Level1:
 
     def stop(self):
         self.p1.savefile()
+        self.text.remove_node()
         self.option1.remove_node()
         self.option2.remove_node()
         self.option3.remove_node()
         self.background.remove_node()
         self.level1.remove_node()
-        #self.linfog.remove_node()
-        #self.plight.remove_node()
         render.clearLight()
-        self.keyboard.press('7' )
-        self.keyboard.release('7' )
+        self.keyboard.press('4' )
+        self.keyboard.release('4' )
         self.__del__()

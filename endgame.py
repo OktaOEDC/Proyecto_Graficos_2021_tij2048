@@ -10,7 +10,7 @@ from direct.gui.DirectGuiGlobals import WITHIN
 from direct.gui.OnscreenText import OnscreenText
 from direct.gui.DirectGui import *
 import yaml
-
+import player
 
 class Endgame:
     def __init__(self):
@@ -18,6 +18,7 @@ class Endgame:
         self.keyboard = Controller()
         self.runner_font = loader.loadFont('./fonts/runner/BLADRMF_.TTF')
         self.title = 'TIJUANA 2033'
+        self.p1 = player.Player()
 
     def start(self):
         self.ambientSound = loader.loadSfx('./audio/naive.ogg')
@@ -42,16 +43,24 @@ class Endgame:
         self.fondo.remove_node()
         self.alnp.remove_node()
         render.clearLight()
-        self.text.remove_node
+        self.end.remove_node()
+        for text in self.text_pointers():
+            text.remove_node()
         self.__del__()
 
     def __del__(self):
-        pass
+        print('[*] Destructor called')
 
     def report(self):
-        self.text = OnscreenText(font=self.runner_font, text='FIN DEL JUEGO', scale=0.2, pos=[
+        self.p1.loadfile()
+        reports = self.p1.get_phil()
+        self.end = OnscreenText(font=self.runner_font, text='FIN DEL JUEGO', scale=0.2, pos=[
             0, 0], fg=[240, 0, 0, 1], shadow=[0.5, 0.5, 0.5, 0.5], shadowOffset=(0.04, 0.04))
-        self.text = OnscreenText(font=self.runner_font, text='bye', scale=0.1, pos=[
-            0, -10], fg=[240, 0, 0, 1], shadow=[0.5, 0.5, 0.5, 0.5], shadowOffset=(0.04, 0.04))
-        self.text = OnscreenText(font=self.runner_font, text='Hola Omar!', scale=0.1, pos=[
-            0, -20], fg=[240, 0, 0, 1], shadow=[0.5, 0.5, 0.5, 0.5], shadowOffset=(0.04, 0.04))
+
+        dropy = -0.5
+        for text in reports:
+            self.text = OnscreenText(font=self.runner_font, text=str(text), scale=0.1, pos=[
+            0, dropy], fg=[240, 0, 0, 1], shadow=[0.5, 0.5, 0.5, 0.5], shadowOffset=(0.04, 0.04),wordwrap=20)
+            self.text_pointers.append(self.text)
+            dropy-=0.3
+            
