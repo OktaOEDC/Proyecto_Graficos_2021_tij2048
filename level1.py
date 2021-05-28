@@ -1,24 +1,28 @@
-
-from direct.particles.ParticleEffect import ParticleEffect
-from direct.showbase.ShowBase import *
-from panda3d.core import *
-from direct.gui.DirectGui import *
-from direct.showbase.Loader import Loader
-from direct.gui.OnscreenText import OnscreenText
-from direct.task import Task
-from direct.gui.OnscreenImage import OnscreenImage
-from direct.showbase.ShowBase import ShowBase
-from panda3d.core import *
+import yaml
 from direct.gui.DirectButton import DirectButton
-from direct.gui.DirectGuiGlobals import WITHIN
-from direct.gui.OnscreenText import OnscreenText
 from direct.gui.DirectGui import *
+from direct.gui.DirectGuiGlobals import WITHIN
+from direct.gui.OnscreenImage import OnscreenImage
+from direct.gui.OnscreenText import OnscreenText
+from direct.particles.ParticleEffect import ParticleEffect
+from direct.showbase.Loader import Loader
+from direct.showbase.ShowBase import *
+from direct.showbase.ShowBase import ShowBase
+from direct.task import Task
+from panda3d.core import *
+from pynput.keyboard import Controller, Key
+
 import player
+
+
 class Level1:
     def __init__(self):
+        self.text_pointers = []
+        self.keyboard = Controller()
+        
         base.cam2dp.node().getDisplayRegion(0).setSort(-20)
         self.runner_font = loader.loadFont('./fonts/runner/BLADRMF_.TTF')
-        self.p1 = player.Player(self.p1.loadfile())
+        self.p1 = player.Player()
 
     def start(self):
         # load
@@ -28,7 +32,7 @@ class Level1:
         self.level1.setPos(0, 0, 0)
 
         # start
-        camera.setPos(-2,2, 4)
+        camera.setPos(-2, 2, 4)
         camera.lookAt(self.level1)
 
         # start
@@ -46,9 +50,7 @@ class Level1:
         self.plight.setColor((1, 1, 1, 1))
         self.plight.setAttenuation((1, 0, 1))
 
-
         self.buttons()
-
 
     def __del__(self):
         print('[*] Destructor called')
@@ -78,7 +80,7 @@ class Level1:
             scale=0.1,
             pos=(1, -5, -0.75),
             frameTexture=None,
-            command=onClick3,
+            command=self.onClick3,
             relief=DGG.FLAT)
 
     def onClick1(self):
@@ -104,12 +106,14 @@ class Level1:
 
     def stop(self):
         self.p1.savefile()
-        NodePath.remove_node(self.option1)
-        NodePath.remove_node(self.option2)
-        NodePath.remove_node(self.option3)
+        self.option1.remove_node()
+        self.option2.remove_node()
+        self.option3.remove_node()
+        self.background.remove_node()
+        self.level1.remove_node()
+        #self.linfog.remove_node()
+        #self.plight.remove_node()
         render.clearLight()
-        NodePath.remove_node(self.level1)
-        Nodepath.remove_node(self.background)
-        Nodepath.remove_node(self.linfog)
-        NodePath.remove_node(self.plight)
+        self.keyboard.press('7' )
+        self.keyboard.release('7' )
         self.__del__()

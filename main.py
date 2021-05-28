@@ -23,6 +23,7 @@ import crawl
 import logoscreen
 import level1
 import level2
+import endgame
 loadPrcFile("config/conf.prc")
 
 
@@ -54,27 +55,26 @@ class Tijuana2033(ShowBase, FSM):
         self.plight.setColor((1, 1, 1, 1))
         self.plnp = self.render.attachNewNode(self.plight)
         self.render.setLight(self.plnp)
-        
-        
+
+
         self.intro = logoscreen.Logoscreen()
         self.intro.start()
-        
+
         self.crawl = crawl.testCrawl()
         self.accept('1',self.crawl.start)
-        
+
         self.menu = menu.Menu()
         self.accept('2',self.menu.start)
 
         self.l1 = level1.Level1()
         self.accept('3',self.l1.start)
-        
+
         self.l2 = level2.Level2()
         self.accept('4',self.l2.start)
-
- 
-
         
-    
-
+        self.end = endgame.Endgame()
+        self.accept('7',self.end.start)
+        
+        
 Game = Tijuana2033()
 Game.run()

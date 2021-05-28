@@ -1,16 +1,16 @@
-educacion: 0
+educacion: 2
 flags:
-  anarquista: true
+  anarquista: false
   autoritario: false
   comunista: false
   fascista: false
   libertariano: false
   neoliberal: false
 mascara: 0
-name: Julio
-politica: 0
+name: username
+politica: 3
 popularidad: 0
-vidas: 11
+vidas: 1
 wallet: 0
-xx: 10
-yy: 12
+xx: 0
+yy: 0

@@ -107,7 +107,7 @@ class Player:
         Args:
             change ([int]): [Numero entero negativo o positivo]
         """
-        if change is int:
+        if type(change) == int:
             self.politica += change
         else:
             logging.debug('change de POLITICA no es entero')
@@ -117,7 +117,7 @@ class Player:
         Args:
             change ([int]): [Numero entero negativo o positivo]
         """
-        if change is int:
+        if type(change) == int:
             self.educacion += change
         else:
             logging.debug('change  de EDUCACION no es entero')
@@ -127,7 +127,7 @@ class Player:
         Args:
             change ([bool]): [Boolean que indica mascara puesta o no]
         """
-        if change is int:
+        if type(change) == int:
             self.politica = change
         else:
             logging.debug('change de POP no es int')
@@ -137,7 +137,7 @@ class Player:
         Args:
             change ([bool]): [Boolean que indica mascara puesta o no]
         """
-        if change is bool:
+        if type(change) == bool:
             self.mascara = change
         else:
             logging.debug('change de POP no es int')

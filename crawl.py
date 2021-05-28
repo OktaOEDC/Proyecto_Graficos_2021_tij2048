@@ -12,7 +12,7 @@ class testCrawl:
     def __init__(self):
         self.text_pointers = []
         self.keyboard = Controller()
-        self.objects = [] 
+        self.objects = []
         self.fondo = loader.loadModel("./models/fondo_menu.bam")
         self.fondo.reparentTo(render)
         self.fondo.setScale(0.6, 0.6, 0.6)
@@ -41,11 +41,13 @@ class testCrawl:
         self.ambientSound.stop()
         for obj in self.objects:
             obj.removeNode()
-        self.keyboard.press('2' )
-        self.keyboard.release('2' )
+        self.keyboard.press('2')
+        self.keyboard.release('2')
         self.__del__()
-    def auxstop(self,task):
+
+    def auxstop(self, task):
         self.stop()
+
     def crawl(self):
         textposx = 0.0
         textposy = 0.5
@@ -57,7 +59,8 @@ class testCrawl:
                 self.textdelay += 0.2
                 textposy -= 0.1
             textposy -= 0.05
-        self.exit = taskMgr.doMethodLater(10,self.auxstop,'exit')
+        self.exit = taskMgr.doMethodLater(10, self.auxstop, 'exit')
+
     def slow_crawl(self, argtext, _posx, _posy):
         self.textObject = OnscreenText(text=argtext, pos=(_posx, _posy), scale=0.05,  fg=[
             240, 240, 240, 1], wordwrap=45, bg=[0, 0, 0, 0.1])

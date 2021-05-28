@@ -1,4 +1,3 @@
-from pynput.keyboard import Key, Controller
 from direct.fsm.FSM import FSM
 from direct.gui.DirectButton import DirectButton
 from direct.gui.DirectEntry import DirectEntry
@@ -7,17 +6,19 @@ from direct.gui.DirectGuiGlobals import WITHIN
 from direct.gui.OnscreenImage import OnscreenImage
 from direct.gui.OnscreenText import OnscreenText
 from direct.showbase import DirectObject
+from direct.showbase.Loader import Loader
 from direct.showbase.ShowBase import *
 from direct.showbase.ShowBase import ShowBase
 from direct.task import Task, TaskManagerGlobal
 from direct.task.TaskManagerGlobal import taskMgr
 from panda3d.core import *
-from direct.showbase.Loader import Loader
+from pynput.keyboard import Controller, Key
+
+import crawl
+import level1
+import logoscreen
 import player
 import textcrawl
-import crawl
-import logoscreen
-import level1
 
 
 class Menu:
@@ -88,6 +89,7 @@ class Menu:
         #  self.win.requestProperties(props)
         pass
 
-    def make_player(self,name):      
+    def make_player(self):      
         self.player = player.Player(self.TextInsertNameInput.get())
         self.player.savefile()
+        self.stop()
