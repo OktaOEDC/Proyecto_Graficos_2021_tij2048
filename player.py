@@ -1,17 +1,33 @@
+import math
 import yaml
 import logging
+import numpy as np
 from direct.showbase.ShowBase import ShowBase
 logging.basicConfig(level=logging.DEBUG,
                     format='%(levelname)s - %(message)s')
 
 
-class Player:  
+class Player:
     """Player class.
 
     Returns:
         [class]: [player class methods and attributes]
     """
-    phil_dict = {"Dios": "teologica",
+
+
+    def __init__(self, name='username', wallet=0, vidas=3, politica=0, educacion=0, popularidad=0, mascara=0, xx=0, yy=00):
+        self.name = name
+        self.wallet = wallet
+        self.vidas = vidas
+        self.politica = politica
+        self.educacion = educacion
+        self.popularidad = popularidad
+        self.mascara = mascara
+        self.xx = xx
+        self.yy = yy
+        self.flags = {'anarquista': False, 'libertariano': False, 'fascista': False,
+                      'comunista': False, 'neoliberal': False, 'populista': False, 'autoritario': False}
+        self.phil_dict = {"Dios": "teologica",
                  "'Griegos'": "naturalista",
                  "Democrito": "democratico",
                  "Odin": "Mitologica",
@@ -33,42 +49,29 @@ class Player:
                  "Rand": "Objetivismo",
                  "Chomsky": "Medios",
                  "Magon": "Anarquismo"}
-    phil_values = {"Dios": "teologica",
-                   "'Griegos'": "naturalista",
-                   "Democrito": "democratico",
-                   "Odin": "Mitologica",
-                   "Socrates": "socratico",
-                   "Platon": "platonico",
-                   'Papa': 'Edad Media',
-                   "Davinci": "Renacimiento",
-                   "Descartes": "Dualista",
-                   "Locke": "Liberalimo",
-                   "Berkeley": "inmaterialismo",
-                   "Kant": "idealismo",
-                   "Schelling": "Romaticismo",
-                   "Hegel": "idealismo aleman",
-                   "Kierkegaard": "existencialismo",
-                   "Marx": "socialismo",
-                   "Darwin": "Evolutismo",
-                   "Freud": "proto fenomenologia",
-                   "Foucalt": "post estructuralista",
-                   "Rand": "Objetivismo",
-                   "Chomsky": "Medios",
-                   "Magon": "Anarquismo"}
-
-    def __init__(self, name='username',wallet=0,vidas=3,politica=0,educacion=0,popularidad=0,mascara=0,xx=0,yy=00):
-        self.name = name
-        self.wallet = wallet
-        self.vidas = vidas
-        self.politica = politica
-        self.educacion = educacion
-        self.popularidad = popularidad
-        self.mascara = mascara
-        self.xx = xx
-        self.yy = yy
-        self.flags = {'anarquista': False, 'libertariano': False, 'fascista': False,
-                      'comunista': False, 'neoliberal': False, 'populista': False, 'autoritario': False}
-
+        self.phil_values = {"Dios": [2, 1, 7, 1],
+                   "'Griegos'": [5, 5, 3, 0],
+                   "Democrito": [10, 8, 5, 1],
+                   "Odin": [0, 9, 5, 0],
+                   "Socrates": [5, 10, 3, 0],
+                   "Platon": [2, 2, 9, 0],
+                   'Papa': [10, 1, 4, 0],
+                   "Davinci": [4, 9, 2, 1],
+                   "Descartes": [4, 4, 4, 0],
+                   "Locke": [3, 7, 10, 1],
+                   "Berkeley": [0, 0, 1, 1],
+                   "Kant": [9, 7, 8, 0],
+                   "Schelling": [6, 8, 6, 1],
+                   "Hegel": [7, 5, 7, 0],
+                   "Kierkegaard": [7, 5, 7, 0],
+                   "Marx": [0, 10, 1, 1],
+                   "Darwin": [9, 10, 9, 1],
+                   "Freud": [7, 9, 4, 0],
+                   "Foucalt": [1, 4, 7, 1],
+                   "Rand": [3, 8, 6, 1],
+                   "Chomsky": [9, 10, 5, 1],
+                   "Magon": [5, 9, 4, 1]}
+        self.statements = []
         self.mode_amlo()
         self.mode_mexico()
         self.mode_pri()
@@ -157,7 +160,7 @@ class Player:
     def get_mascara(self):
         return self.mascara
 
-    def calculate_phil(self):
+    def edge_cases(self):
         """Aun no he terminado las auxiliares
         """
         # --------------edge cases -----------
@@ -177,6 +180,49 @@ class Player:
         if (self.get_pol() >= 10 and (self.get_pop() > 5) and (self.get_edu() > 5)):
             self.flags['fascista']
             logging.debug('El jugador es Fascista')
+        for key in self.flags:
+            if key == True:
+                self.statements.append(self.name, 'eres', key)
+        # worst case: no case
+        if len(self.statements) < 1:
+            self.statements.append(
+                self.name, 'pareces no tener afilicion politica')
+        return self.statements
+
+    def get_phil(self):
+        """values = [self.get_pol(), self.get_edu(), self.get_edu(),
+                  self.get_mascara()]"""
+        values = [5, 9, 4, 1]
+        diferences = [0,0,0,0]
+        temp_dif = [0,0,0,0]
+        bestdif = 0
+        dif = 0
+
+        for key in self.flags:
+            if key == True:
+                self.statements.append(self.name, 'eres', key)
+                print((self.name, 'eres', key))
+
+        for key, value in self.phil_values.items():
+            for index in range(len(values)):
+                temp_dif[index] = (value[index]-(values[index]))
+            
+            dif = (temp_dif[0])+(temp_dif[1])+(temp_dif[2])+(temp_dif[2])
+            if dif < bestdif:
+                bestdif = dif
+                diferences = temp_dif
+                dif = 0
+            print('diferences are',diferences,'total:', bestdif)
+            if value == values:
+                self.statements.append(
+                    ('Pareces acercarte al perfil de', key, 'como', value))
+                print((
+                    'Pareces acercarte al perfil de', key, 'como', value))
+                # worst case: no case
+        if len(self.statements) < 1:
+            self.statements.append((
+                self.name, 'pareces no tener afilicion politica'))
+        return self.statements
 
     def readyaml(self):
         """SAVEFILE GENERATOR
@@ -211,11 +257,11 @@ class Player:
         self.mascara = dictionary['mascara']
 
     def player_to_yaml(self, dictionary):
-        with open('player.yaml','w') as file:
-            yaml.dump(dictionary,file)
+        with open('player.yaml', 'w') as file:
+            yaml.dump(dictionary, file)
 
     def savefile(self):
         self.player_to_yaml(self.makedict())
-        
+
     def loadfile(self):
         self.yaml_to_player(self.readyaml())
